@@ -10,6 +10,8 @@ public class Comment {
 
     private int a = 5;
 
+    private String hello = "Hello!";
+
 
     public Long getId() {
         return id;
