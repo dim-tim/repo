@@ -5,12 +5,11 @@ public class Delivery {
 
     private Long id;
     private Integer price;
-
-
     private boolean isWhole;
-
-
     private Integer priceDelivery;
+
+
+
 
 
     public Long getId() {
