@@ -8,8 +8,6 @@ public class Recipe {
 
     private String name;
 
-    private String a="Dima";
-    private String b="sldkjf";
 
 
     //TODO - add type for photo
