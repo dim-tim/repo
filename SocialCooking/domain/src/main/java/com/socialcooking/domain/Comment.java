@@ -8,6 +8,8 @@ public class Comment {
 
     private String text;
 
+    private int a = 5;
+
 
     public Long getId() {
         return id;
