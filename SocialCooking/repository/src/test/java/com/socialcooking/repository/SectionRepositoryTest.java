@@ -16,17 +16,9 @@ public class SectionRepositoryTest {
         ctx.refresh();
         SectionRepository sectionRepository = ctx.getBean(
                 "SectionRepository", SectionRepository.class);
-// List contacts without details
-        List<Section> contacts = sectionRepository.findAll();
-//        listContacts(contacts);
+
+        List<Section> sections = sectionRepository.findAll();
+
     }
-//    private static void listContacts(List<Contact> contacts) {
-//        System.out.println("");
-//        System.out.println("Listing contacts without details:");
-//        for (Contact contact: contacts) {
-//            System.out.println(contact);
-//            System.out.println();
-//        }
-//
-//    }
+
 }
