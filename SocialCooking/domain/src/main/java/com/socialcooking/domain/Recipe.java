@@ -3,33 +3,12 @@ package com.socialcooking.domain;
 
 public class Recipe {
 
-    private Long id;
-
-
     private String name;
-
-
-
-    //TODO - add type for photo
-//    private
-
-
+    private byte [] photo;
     private String description;
-
-//    ????
-//    private boolean accepted;
-
-
+    //accepted by manager
+    private boolean accepted;
     private byte mark;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -53,5 +32,21 @@ public class Recipe {
 
     public void setMark(byte mark) {
         this.mark = mark;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
 }

@@ -5,62 +5,24 @@ import java.util.Calendar;
 
 public class User {
 
-    private Long id;
-
-
     private String login;
-
-
     private String password;
-
-
     private String name;
-
-
     private String surname;
-
-
     private String email;
-
-
-    //TODO - add type for photo
-//    private
-
-
+    private byte [] photo;
+    //Why Calendar? May be joda? http://joda.sourceforge.net/
     private Calendar birthday;
-
-
     private GenderType gender;
-
-
     private String telephone;
-
-
     private String country;
-
-
     private String city;
-
-
     private String address;
-
-
     private String about;
-
-
-    private byte rating;
-
-
+    private Double rating;
+    //May be joda?
     private Calendar dateRegistration;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getLogin() {
         return login;
@@ -158,19 +120,27 @@ public class User {
         this.about = about;
     }
 
-    public byte getRating() {
-        return rating;
-    }
-
-    public void setRating(byte rating) {
-        this.rating = rating;
-    }
-
     public Calendar getDateRegistration() {
         return dateRegistration;
     }
 
     public void setDateRegistration(Calendar dateRegistration) {
         this.dateRegistration = dateRegistration;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 }

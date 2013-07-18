@@ -4,19 +4,12 @@ package com.socialcooking.domain;
 public class Comment {
 
     private Long id;
-
-
     private String text;
-
-    private int a = 5;
-
-    private String hello = "Hello!";
 
 
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;

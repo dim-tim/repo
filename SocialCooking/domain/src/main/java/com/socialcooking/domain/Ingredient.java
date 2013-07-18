@@ -4,14 +4,8 @@ package com.socialcooking.domain;
 public class Ingredient {
 
     private Long id;
-
-
     private String name;
-
-
     private String comment;
-
-
     private String quantity;
 
 
