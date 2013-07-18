@@ -1,0 +1,1 @@
+INSERT INTO section VALUES('Салаты', 'Легкая закуска');
