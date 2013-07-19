@@ -20,6 +20,7 @@
 
     <dependencies>
 
+        <!-- internal modules -->
         <dependency>
             <groupId>com.socialcooking</groupId>
             <artifactId>domain</artifactId>
@@ -37,12 +38,7 @@
             <artifactId>c3p0</artifactId>
         </dependency>
 
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -53,21 +49,19 @@
             <artifactId>spring-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-
+        <!-- for run sql scripts in xml -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
 
+        <!-- this dependency is used in tests for special annotations -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
 
+        <!-- object relation mapping. This dependency allows use jpa with hibernate -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -116,17 +110,25 @@
             <scope>runtime</scope>
         </dependency>
 
-
+        <!-- for tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <!-- for h2 database that is used in tests -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+
+        </dependency>
+
 
 
     </dependencies>
