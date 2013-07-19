@@ -126,10 +126,7 @@
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
-
         </dependency>
-
-
 
     </dependencies>
 </project>

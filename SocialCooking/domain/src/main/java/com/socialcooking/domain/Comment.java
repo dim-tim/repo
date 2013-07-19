@@ -1,7 +1,7 @@
 package com.socialcooking.domain;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ public class Comment {
 
     private Long id;
     private String text;
-    private DateTime date;
+    private LocalDateTime date;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +37,14 @@ public class Comment {
     }
 
     @Column(name = "date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 //    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
 //    @DateTimeFormat(iso = ISO.DATE)
-    public DateTime getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }
