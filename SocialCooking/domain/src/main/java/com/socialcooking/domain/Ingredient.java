@@ -1,6 +1,12 @@
 package com.socialcooking.domain;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ingredient")
+@NamedQueries({
+        @NamedQuery(name = "Ingredient.findAll", query = "select ing from Ingredient ing"),
+        @NamedQuery(name = "Ingredient.findById", query = "select ing from Ingredient ing where ing.id = :id")})
 public class Ingredient {
 
     private Long id;
@@ -8,7 +14,9 @@ public class Ingredient {
     private String comment;
     private String quantity;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ingredient")
     public Long getId() {
         return id;
     }
@@ -17,6 +25,7 @@ public class Ingredient {
         this.id = id;
     }
 
+    @Column(name = "name_ingredient")
     public String getName() {
         return name;
     }
@@ -25,6 +34,7 @@ public class Ingredient {
         this.name = name;
     }
 
+    @Column(name = "comment")
     public String getComment() {
         return comment;
     }
@@ -33,6 +43,7 @@ public class Ingredient {
         this.comment = comment;
     }
 
+    @Column(name = "quantity")
     public String getQuantity() {
         return quantity;
     }

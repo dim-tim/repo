@@ -1,8 +1,15 @@
 package com.socialcooking.domain;
 
 
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "app_user")
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "select u from User u"),
+        @NamedQuery(name = "User.findById", query = "select u from User u where u.login = :login")})
 public class User {
 
     private String login;
@@ -11,19 +18,20 @@ public class User {
     private String surname;
     private String email;
     private byte [] photo;
-    //Why Calendar? May be joda? http://joda.sourceforge.net/
-    private Calendar birthday;
+
+    private DateTime birthday;
     private GenderType gender;
-    private String telephone;
+    private Integer telephone;
     private String country;
     private String city;
     private String address;
     private String about;
     private Double rating;
-    //May be joda?
-    private Calendar dateRegistration;
 
+    private DateTime dateRegistration;
 
+    @Id
+    @Column(name = "user_login")
     public String getLogin() {
         return login;
     }
@@ -32,6 +40,7 @@ public class User {
         this.login = login;
     }
 
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -40,6 +49,7 @@ public class User {
         this.password = password;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -48,6 +58,7 @@ public class User {
         this.name = name;
     }
 
+    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
@@ -56,6 +67,7 @@ public class User {
         this.surname = surname;
     }
 
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -64,14 +76,17 @@ public class User {
         this.email = email;
     }
 
-    public Calendar getBirthday() {
+    @Column(name = "birth_date")
+    public DateTime getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(DateTime birthday) {
         this.birthday = birthday;
     }
 
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     public GenderType getGender() {
         return gender;
     }
@@ -80,14 +95,16 @@ public class User {
         this.gender = gender;
     }
 
-    public String getTelephone() {
+    @Column(name = "telephone")
+    public Integer getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(Integer telephone) {
         this.telephone = telephone;
     }
 
+    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -96,6 +113,7 @@ public class User {
         this.country = country;
     }
 
+    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -104,6 +122,7 @@ public class User {
         this.city = city;
     }
 
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -112,6 +131,7 @@ public class User {
         this.address = address;
     }
 
+    @Column(name = "about")
     public String getAbout() {
         return about;
     }
@@ -120,14 +140,16 @@ public class User {
         this.about = about;
     }
 
-    public Calendar getDateRegistration() {
+    @Column(name = "registration_date")
+    public DateTime getDateRegistration() {
         return dateRegistration;
     }
 
-    public void setDateRegistration(Calendar dateRegistration) {
+    public void setDateRegistration(DateTime dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
 
+    @Column(name = "rating")
     public Double getRating() {
         return rating;
     }
@@ -136,6 +158,10 @@ public class User {
         this.rating = rating;
     }
 
+    //it's for lazy download of pictures
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(name = "photo")
     public byte[] getPhoto() {
         return photo;
     }
