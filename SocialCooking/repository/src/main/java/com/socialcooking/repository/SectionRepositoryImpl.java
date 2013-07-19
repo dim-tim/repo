@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author Mikalai Kisel
  */
+
 @Service("SectionRepository")
 @Repository
 @Transactional
