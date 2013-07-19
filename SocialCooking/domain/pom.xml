@@ -15,26 +15,20 @@
 
     <dependencies>
 
-        <!-- Hibernate -->
+        <!-- Hibernate (With this module we can use jpa annotations)-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
+
+        <!-- for hibernate validation -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+
     </dependencies>
-
-
-
-
-
 
 
 </project>

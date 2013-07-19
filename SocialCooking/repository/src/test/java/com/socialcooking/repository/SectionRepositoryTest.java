@@ -21,7 +21,7 @@ import static junit.framework.Assert.assertEquals;
 public class SectionRepositoryTest {
 
     @Autowired
-    SectionRepository sectionRepository;
+    private SectionRepository sectionRepository;
 
     @Test
     public void findAllTest() {
@@ -29,8 +29,6 @@ public class SectionRepositoryTest {
         assertEquals(1, sections.size());
         assertEquals("Салаты", sections.get(0).getName());
     }
-
-
 
 
 }
