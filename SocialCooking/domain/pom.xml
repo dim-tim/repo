@@ -27,6 +27,17 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+        <!-- library for date and time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-hibernate</artifactId>
+        </dependency>
+
 
     </dependencies>
 
