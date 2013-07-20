@@ -31,6 +31,8 @@ public class User {
 
     private DateTime dateRegistration;
 
+
+
     @Id
     @Column(name = "user_login")
     public String getLogin() {
