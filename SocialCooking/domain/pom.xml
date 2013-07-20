@@ -37,9 +37,6 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time-hibernate</artifactId>
         </dependency>
-
-
     </dependencies>
-
 
 </project>

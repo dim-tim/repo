@@ -2,6 +2,7 @@ package com.socialcooking.domain;
 
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ public class User {
     private String email;
     private byte [] photo;
 
-    private DateTime birthday;
+    private LocalDateTime birthday;
     private GenderType gender;
     private Integer telephone;
     private String country;
@@ -29,6 +30,8 @@ public class User {
     private Double rating;
 
     private DateTime dateRegistration;
+
+
 
     @Id
     @Column(name = "user_login")
@@ -77,11 +80,11 @@ public class User {
     }
 
     @Column(name = "birth_date")
-    public DateTime getBirthday() {
+    public LocalDateTime getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(DateTime birthday) {
+    public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
     }
 

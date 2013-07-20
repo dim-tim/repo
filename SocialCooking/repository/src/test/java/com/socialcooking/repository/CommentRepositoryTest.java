@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Comment;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,10 @@ public class CommentRepositoryTest {
     public void findByIdTest() {
         Comment comment = commentRepository.findById(1L);
         assertEquals("Это первое сообщение", comment.getText());
-        assertEquals("2013-07-19 05:25:00", comment.getDate());
+        LocalDateTime dateTime = comment.getDate();
+        assertEquals(2013, dateTime.getYear());
+        assertEquals(7, dateTime.getMonthOfYear());
+        assertEquals(19, dateTime.getDayOfMonth());
     }
 
 
