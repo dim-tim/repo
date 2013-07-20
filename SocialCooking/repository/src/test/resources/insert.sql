@@ -9,3 +9,7 @@ INSERT INTO app_comment VALUES(null, 'Третье сообщение', '2013-07
 INSERT INTO delivery VALUES(null, 20000000, true, 200000000);
 INSERT INTO delivery VALUES(null, 2000, false, 200);
 INSERT INTO delivery VALUES(null, 3000, false, 300);
+
+INSERT INTO ingredient VALUES(null, 'Картофель', '', '100 грамм');
+INSERT INTO ingredient VALUES(null, 'Морковь', '', '3 шт');
+INSERT INTO ingredient VALUES(null, 'Масло', '', '1 уп');

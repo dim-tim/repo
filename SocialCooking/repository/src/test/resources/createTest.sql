@@ -31,4 +31,15 @@ CREATE  TABLE  delivery (
   PRIMARY KEY (id_delivery))
 ;
 
+-- -----------------------------------------------------
+-- Table ingredient
+-- -----------------------------------------------------
+CREATE  TABLE  ingredient (
+  id_ingredient INT NOT NULL AUTO_INCREMENT ,
+  name_ingredient VARCHAR(250) NOT NULL ,
+  comment VARCHAR(250) NULL ,
+  quantity VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (id_ingredient))
+;
+
 
