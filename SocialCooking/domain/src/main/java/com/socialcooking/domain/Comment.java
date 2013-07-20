@@ -37,6 +37,7 @@ public class Comment {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comment")
