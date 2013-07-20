@@ -34,12 +34,37 @@ public class CommentRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        Comment comment = commentRepository.findById(1L);
-        assertEquals("Это первое сообщение", comment.getText());
-        LocalDateTime dateTime = comment.getDate();
-        assertEquals(2013, dateTime.getYear());
-        assertEquals(7, dateTime.getMonthOfYear());
-        assertEquals(19, dateTime.getDayOfMonth());
+        Comment expectedComment = new Comment(1L, "Это первое сообщение", new LocalDateTime("2013-07-19T05:25:00"), 3, 1);
+        Comment realComment = commentRepository.findById(1L);
+        assertEquals(expectedComment, realComment);
+    }
+
+    @Test
+    public void saveTest() {
+        Comment expectedComment = new Comment("Очередное сообщение", new LocalDateTime("2013-07-20T05:25:00"), 3, 3);
+        Comment realComment = commentRepository.save(expectedComment);
+        assertEquals(expectedComment, realComment);
+    }
+
+    @Test(expected = javax.persistence.NoResultException.class)
+    public void deleteTest() {
+        Comment comment = commentRepository.findById(2L);
+
+        commentRepository.delete(comment);
+
+        commentRepository.findById(2L);
+    }
+
+    @Test
+    public void updateTest() {
+        Comment comment = commentRepository.findById(3L);
+        assertEquals("Третье сообщение", comment.getText());
+
+        comment.setText("Обновлено");
+        commentRepository.update(comment);
+
+        comment = commentRepository.findById(3L);
+        assertEquals("Обновлено", comment.getText());
     }
 
 

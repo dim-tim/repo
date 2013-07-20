@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertNotNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
-//May be H2 or MYSQL
+//May be H2 or MYSQL. MySQL is not work.
 @ActiveProfiles("H2")
 public class SectionRepositoryTest {
 

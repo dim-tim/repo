@@ -61,6 +61,6 @@ public class CommentRepositoryImpl implements CommentRepository{
     public void delete(Comment comment) {
         log.info("Delete comment");
         Comment mergedComment = em.merge(comment);
-        em.remove(comment);
+        em.remove(mergedComment);
     }
 }

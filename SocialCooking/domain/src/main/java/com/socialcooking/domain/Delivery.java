@@ -15,6 +15,23 @@ public class Delivery {
     private boolean isPrepared;
     private Integer priceDelivery;
 
+    public Delivery(){
+
+    }
+
+    public Delivery(Long id, Integer price, boolean prepared, Integer priceDelivery) {
+        this.id = id;
+        this.price = price;
+        isPrepared = prepared;
+        this.priceDelivery = priceDelivery;
+    }
+
+    public Delivery(Integer price, boolean prepared, Integer priceDelivery) {
+        this.price = price;
+        isPrepared = prepared;
+        this.priceDelivery = priceDelivery;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_delivery")
@@ -51,5 +68,30 @@ public class Delivery {
 
     public void setPriceDelivery(Integer priceDelivery) {
         this.priceDelivery = priceDelivery;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Delivery delivery = (Delivery) o;
+
+        if (isPrepared != delivery.isPrepared) return false;
+        if (id != null ? !id.equals(delivery.id) : delivery.id != null) return false;
+        if (price != null ? !price.equals(delivery.price) : delivery.price != null) return false;
+        if (priceDelivery != null ? !priceDelivery.equals(delivery.priceDelivery) : delivery.priceDelivery != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (isPrepared ? 1 : 0);
+        result = 31 * result + (priceDelivery != null ? priceDelivery.hashCode() : 0);
+        return result;
     }
 }
