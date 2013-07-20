@@ -27,6 +27,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository{
     private Logger log = LoggerFactory.getLogger(DeliveryRepositoryImpl.class);
 
     @Override
+    @Transactional(readOnly=true)
     public Delivery findById(Long id) {
         log.info("Find delivery by id");
         TypedQuery<Delivery> query = em.createNamedQuery("Delivery.findById", Delivery.class);
@@ -36,6 +37,7 @@ public class DeliveryRepositoryImpl implements DeliveryRepository{
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<Delivery> findAll() {
         log.info("Find all deliveries");
         List<Delivery> deliveries = em.createNamedQuery("Delivery.findAll", Delivery.class).getResultList();

@@ -27,6 +27,7 @@ public class IngredientRepositoryImpl implements IngredientRepository{
     private Logger log = LoggerFactory.getLogger(IngredientRepositoryImpl.class);
 
     @Override
+    @Transactional(readOnly=true)
     public Ingredient findById(Long id) {
         log.info("Find ingredient by id");
         TypedQuery<Ingredient> query = em.createNamedQuery("Ingredient.findById", Ingredient.class);
@@ -36,6 +37,7 @@ public class IngredientRepositoryImpl implements IngredientRepository{
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<Ingredient> findAll() {
         log.info("Find all ingredients");
         List<Ingredient> ingredients = em.createNamedQuery("Ingredient.findAll", Ingredient.class).getResultList();

@@ -42,4 +42,18 @@ CREATE  TABLE  ingredient (
   PRIMARY KEY (id_ingredient))
 ;
 
+-- -----------------------------------------------------
+-- Table provider
+-- -----------------------------------------------------
+CREATE  TABLE  provider (
+  provider_name VARCHAR(100) NOT NULL ,
+  terms_of_delivery TEXT NOT NULL ,
+  about_company TEXT NULL ,
+  accepted TINYINT(1) NOT NULL ,
+  registration_date TIMESTAMP NOT NULL,
+  positive_marks INT,
+  negative_marks INT,
+  PRIMARY KEY (provider_name))
+;
+
 

@@ -27,6 +27,7 @@ public class SectionRepositoryImpl implements SectionRepository{
     private Logger log = LoggerFactory.getLogger(SectionRepositoryImpl.class);
 
     @Override
+    @Transactional(readOnly=true)
     public Section findById(String name) {
         log.info("Find section by id {}", name);
         TypedQuery<Section> query = em.createNamedQuery("Section.findById", Section.class);

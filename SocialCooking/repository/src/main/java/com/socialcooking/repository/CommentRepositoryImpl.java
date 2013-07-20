@@ -28,6 +28,7 @@ public class CommentRepositoryImpl implements CommentRepository{
     private Logger log = LoggerFactory.getLogger(CommentRepository.class);
 
     @Override
+    @Transactional(readOnly=true)
     public Comment findById(Long id) {
         log.info("Find by id "+id);
         TypedQuery<Comment> query = em.createNamedQuery("Comment.findById", Comment.class);
@@ -37,6 +38,7 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<Comment> findAll() {
         log.info("Find all");
         List<Comment> comments = em.createNamedQuery("Comment.findAll", Comment.class).getResultList();
