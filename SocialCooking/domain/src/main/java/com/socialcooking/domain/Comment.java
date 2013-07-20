@@ -12,6 +12,7 @@ import javax.persistence.*;
         @NamedQuery(name = "Comment.findById", query = "select c from Comment c where c.id = :id")})
 public class Comment {
 
+
     private Long id;
     private String text;
     private LocalDateTime date;
