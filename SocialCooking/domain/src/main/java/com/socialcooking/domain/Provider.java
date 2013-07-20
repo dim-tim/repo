@@ -12,6 +12,7 @@ public class Provider {
     private String name;
     private String termsOfDelivery;
     private String aboutCompany;
+    private Boolean accepted;
 
     @Id
     @Column(name = "provider_name")
@@ -39,5 +40,14 @@ public class Provider {
 
     public void setAboutCompany(String aboutCompany) {
         this.aboutCompany = aboutCompany;
+    }
+
+    @Column(name = "accepted")
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 }

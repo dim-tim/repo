@@ -14,7 +14,7 @@ public class Recipe {
     private String description;
     //accepted by manager
     private boolean accepted;
-    private Double mark;
+    private Float mark;
 
     @Id
     @Column(name = "recipe_name")
@@ -36,11 +36,11 @@ public class Recipe {
     }
 
     @Column(name = "mark")
-    public Double getMark() {
+    public Float getMark() {
         return mark;
     }
 
-    public void setMark(Double mark) {
+    public void setMark(Float mark) {
         this.mark = mark;
     }
 
