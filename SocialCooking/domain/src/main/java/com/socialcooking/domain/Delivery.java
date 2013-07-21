@@ -1,6 +1,5 @@
 package com.socialcooking.domain;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -10,9 +9,18 @@ import javax.persistence.*;
         @NamedQuery(name = "Delivery.findById", query = "select d from Delivery d where d.id = :id")})
 public class Delivery {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_delivery")
     private Long id;
+
+    @Column(name = "price")
     private Integer price;
+
+    @Column(name = "is_prepared")
     private boolean isPrepared;
+
+    @Column(name = "delivery_price")
     private Integer priceDelivery;
 
     public Delivery(){
@@ -32,9 +40,6 @@ public class Delivery {
         this.priceDelivery = priceDelivery;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_delivery")
     public Long getId() {
         return id;
     }
@@ -43,7 +48,6 @@ public class Delivery {
         this.id = id;
     }
 
-    @Column(name = "price")
     public Integer getPrice() {
         return price;
     }
@@ -52,7 +56,6 @@ public class Delivery {
         this.price = price;
     }
 
-    @Column(name = "is_prepared")
     public boolean isPrepared() {
         return isPrepared;
     }
@@ -61,7 +64,6 @@ public class Delivery {
         isPrepared = prepared;
     }
 
-    @Column(name = "delivery_price")
     public Integer getPriceDelivery() {
         return priceDelivery;
     }

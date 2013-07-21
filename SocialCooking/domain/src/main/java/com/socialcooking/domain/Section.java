@@ -6,11 +6,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "section")
 @NamedQueries({
-@NamedQuery(name = "Section.findAll", query = "select s from Section s"),
-@NamedQuery(name = "Section.findById", query = "select s from Section s where s.name = :name")})
+        @NamedQuery(name = "Section.findAll", query = "select s from Section s"),
+        @NamedQuery(name = "Section.findById", query = "select s from Section s where s.name = :name")})
 public class Section {
 
+    @Id
+    @Column(name = "name_section")
     private String name;
+
+    @Column(name = "description")
     private String description;
 
     public Section() {
@@ -22,8 +26,6 @@ public class Section {
         this.description = description;
     }
 
-    @Id
-    @Column(name = "name_section")
     public String getName() {
         return name;
     }
@@ -32,7 +34,6 @@ public class Section {
         this.name = name;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }

@@ -2,7 +2,6 @@ package com.socialcooking.domain;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,10 +11,22 @@ import javax.persistence.*;
         @NamedQuery(name = "Comment.findById", query = "select c from Comment c where c.id = :id")})
 public class Comment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comment")
     private Long id;
+
+    @Column(name = "content")
     private String text;
+
+    @Column(name = "date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime date;
+
+    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
+
+    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
 
     public Comment() {
@@ -37,10 +48,6 @@ public class Comment {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_comment")
     public Long getId() {
         return id;
     }
@@ -49,7 +56,6 @@ public class Comment {
         this.id = id;
     }
 
-    @Column(name = "content")
     public String getText() {
         return text;
     }
@@ -58,8 +64,6 @@ public class Comment {
         this.text = text;
     }
 
-    @Column(name = "date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getDate() {
         return date;
     }
@@ -68,7 +72,7 @@ public class Comment {
         this.date = date;
     }
 
-    @Column(name = "positive_marks")
+
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -77,7 +81,7 @@ public class Comment {
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-    @Column(name = "negative_marks")
+
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }

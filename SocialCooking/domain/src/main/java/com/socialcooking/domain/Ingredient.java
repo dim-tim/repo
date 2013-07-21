@@ -9,9 +9,18 @@ import javax.persistence.*;
         @NamedQuery(name = "Ingredient.findById", query = "select ing from Ingredient ing where ing.id = :id")})
 public class Ingredient {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ingredient")
     private Long id;
+
+    @Column(name = "name_ingredient")
     private String name;
+
+    @Column(name = "comment")
     private String comment;
+
+    @Column(name = "quantity")
     private String quantity;
 
     public Ingredient() {
@@ -31,9 +40,6 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ingredient")
     public Long getId() {
         return id;
     }
@@ -42,7 +48,7 @@ public class Ingredient {
         this.id = id;
     }
 
-    @Column(name = "name_ingredient")
+
     public String getName() {
         return name;
     }
@@ -51,7 +57,7 @@ public class Ingredient {
         this.name = name;
     }
 
-    @Column(name = "comment")
+
     public String getComment() {
         return comment;
     }
@@ -60,7 +66,7 @@ public class Ingredient {
         this.comment = comment;
     }
 
-    @Column(name = "quantity")
+
     public String getQuantity() {
         return quantity;
     }
