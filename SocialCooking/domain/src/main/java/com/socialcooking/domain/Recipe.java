@@ -13,6 +13,14 @@ public class Recipe {
     @Column(name = "recipe_name")
     private String name;
 
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="name_section")
+    private Section section;
+
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="user_login")
+    private User user;
+
     @Column(name = "photo_path")
     private String photo;
 
@@ -78,6 +86,22 @@ public class Recipe {
 
     public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
         this.countOfNegativeMarks = countOfNegativeMarks;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

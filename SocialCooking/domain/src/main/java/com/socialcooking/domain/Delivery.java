@@ -14,6 +14,14 @@ public class Delivery {
     @Column(name = "id_delivery")
     private Long id;
 
+    @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    @JoinColumn(name="provider_name")
+    private Provider provider;
+
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="recipe_name")
+    private Recipe recipe;
+
     @Column(name = "price")
     private Integer price;
 
@@ -70,6 +78,22 @@ public class Delivery {
 
     public void setPriceDelivery(Integer priceDelivery) {
         this.priceDelivery = priceDelivery;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override

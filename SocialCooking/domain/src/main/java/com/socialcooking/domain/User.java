@@ -5,6 +5,8 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
@@ -17,9 +19,14 @@ public class User {
     @Column(name = "user_login")
     private String login;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_has_role",
+            joinColumns = @JoinColumn(name = "user_login"),
+            inverseJoinColumns = @JoinColumn(name = "role_name"))
+    private Set<Role> roles = new HashSet<Role>();
+
     @Column(name = "password")
     private String password;
-
 
     @Column(name = "name")
     private String name;
@@ -182,6 +189,14 @@ public class User {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

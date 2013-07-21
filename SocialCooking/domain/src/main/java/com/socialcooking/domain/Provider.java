@@ -16,6 +16,10 @@ public class Provider {
     @Column(name = "provider_name")
     private String name;
 
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="user_login")
+    private User user;
+
     @Column(name = "terms_of_delivery")
     private String termsOfDelivery;
 
@@ -96,6 +100,14 @@ public class Provider {
 
     public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
         this.countOfNegativeMarks = countOfNegativeMarks;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

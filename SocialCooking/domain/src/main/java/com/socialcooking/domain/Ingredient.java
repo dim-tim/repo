@@ -14,6 +14,10 @@ public class Ingredient {
     @Column(name = "id_ingredient")
     private Long id;
 
+    @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    @JoinColumn(name="recipe_name")
+    private Recipe recipe;
+
     @Column(name = "name_ingredient")
     private String name;
 
@@ -73,6 +77,14 @@ public class Ingredient {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override

@@ -16,6 +16,14 @@ public class Comment {
     @Column(name = "id_comment")
     private Long id;
 
+    @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+    @JoinColumn(name="user_login")
+    private User user;
+
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="recipe_name")
+    private Recipe recipe;
+
     @Column(name = "content")
     private String text;
 
@@ -88,6 +96,22 @@ public class Comment {
 
     public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
         this.countOfNegativeMarks = countOfNegativeMarks;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override
