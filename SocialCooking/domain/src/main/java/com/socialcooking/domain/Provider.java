@@ -20,6 +20,19 @@ public class Provider {
     private Integer countOfPositiveMarks;
     private Integer countOfNegativeMarks;
 
+    public Provider() {
+
+    }
+
+    public Provider(String name, String termsOfDelivery, Boolean accepted, String aboutCompany, LocalDateTime registrationDate, Integer countOfPositiveMarks, Integer countOfNegativeMarks) {
+        this.name = name;
+        this.termsOfDelivery = termsOfDelivery;
+        this.accepted = accepted;
+        this.aboutCompany = aboutCompany;
+        this.registrationDate = registrationDate;
+        this.countOfPositiveMarks = countOfPositiveMarks;
+        this.countOfNegativeMarks = countOfNegativeMarks;
+    }
 
     @Id
     @Column(name = "provider_name")
@@ -84,5 +97,40 @@ public class Provider {
 
     public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
         this.countOfNegativeMarks = countOfNegativeMarks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Provider provider = (Provider) o;
+
+        if (aboutCompany != null ? !aboutCompany.equals(provider.aboutCompany) : provider.aboutCompany != null)
+            return false;
+        if (accepted != null ? !accepted.equals(provider.accepted) : provider.accepted != null) return false;
+        if (countOfNegativeMarks != null ? !countOfNegativeMarks.equals(provider.countOfNegativeMarks) : provider.countOfNegativeMarks != null)
+            return false;
+        if (countOfPositiveMarks != null ? !countOfPositiveMarks.equals(provider.countOfPositiveMarks) : provider.countOfPositiveMarks != null)
+            return false;
+        if (name != null ? !name.equals(provider.name) : provider.name != null) return false;
+        if (registrationDate != null ? !registrationDate.equals(provider.registrationDate) : provider.registrationDate != null)
+            return false;
+        if (termsOfDelivery != null ? !termsOfDelivery.equals(provider.termsOfDelivery) : provider.termsOfDelivery != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (termsOfDelivery != null ? termsOfDelivery.hashCode() : 0);
+        result = 31 * result + (aboutCompany != null ? aboutCompany.hashCode() : 0);
+        result = 31 * result + (accepted != null ? accepted.hashCode() : 0);
+        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = 31 * result + (countOfPositiveMarks != null ? countOfPositiveMarks.hashCode() : 0);
+        result = 31 * result + (countOfNegativeMarks != null ? countOfNegativeMarks.hashCode() : 0);
+        return result;
     }
 }

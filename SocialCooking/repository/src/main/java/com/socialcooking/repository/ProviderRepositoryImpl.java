@@ -27,9 +27,10 @@ public class ProviderRepositoryImpl implements ProviderRepository{
 
     @Override
     @Transactional(readOnly=true)
-    public Provider findById(Long id) {
+    public Provider findById(String name) {
         log.info("Find provider by id");
         TypedQuery<Provider> query = em.createNamedQuery("Provider.findById", Provider.class);
+        query.setParameter("name", name);
         Provider provider = query.getSingleResult();
         return provider;
     }

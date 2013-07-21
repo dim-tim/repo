@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ProviderRepository {
 
-    public Provider findById(Long id);
+    public Provider findById(String name);
 
     public List<Provider> findAll();
 
