@@ -2,13 +2,18 @@ package com.socialcooking.repository;
 
 import com.socialcooking.domain.Comment;
 import org.joda.time.LocalDateTime;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -25,6 +30,13 @@ public class CommentRepositoryTest {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    private DataSource datasource;
+
+//    @BeforeClass
+//    public void setUp() {
+//        JdbcTestUtils.executeSqlScript(new JdbcTemplate(datasource), );
+//    }
 
     @Test
     public void findAllTest() {
