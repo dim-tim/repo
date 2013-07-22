@@ -24,7 +24,7 @@ import static junit.framework.Assert.assertNotNull;
 public class IngredientRepositoryTest {
 
     @Autowired
-    private IngredientRepository ingredientRepository;
+    private IngredientRepositoryImpl ingredientRepository;
 
     @Test
     public void findByIdTest() {
