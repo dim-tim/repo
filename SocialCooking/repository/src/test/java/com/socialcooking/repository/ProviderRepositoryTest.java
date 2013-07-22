@@ -25,7 +25,7 @@ import static junit.framework.Assert.assertNotNull;
 public class ProviderRepositoryTest {
 
     @Autowired
-    private ProviderRepository providerRepository;
+    private ProviderRepositoryImpl providerRepository;
 
     @Test
     public void findAllTest() {

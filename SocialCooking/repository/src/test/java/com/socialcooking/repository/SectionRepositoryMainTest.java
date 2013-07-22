@@ -14,8 +14,8 @@ public class SectionRepositoryMainTest {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:datasource.xml");
         ctx.refresh();
-        SectionRepository sectionRepository = ctx.getBean(
-                "SectionRepository", SectionRepository.class);
+        SectionRepositoryImpl sectionRepository = ctx.getBean(
+                "SectionRepository", SectionRepositoryImpl.class);
 
         List<Section> sections = sectionRepository.findAll();
         printSections(sections);

@@ -48,6 +48,14 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
         <jdbc:script location="${insert.sql}"/>
     </jdbc:initialize-database>
 
+
+    <!--<bean id="testRepository" class="com.socialcooking.repository.GenericRepositoryImpl" >-->
+        <!--<property name="em" ref="emf">-->
+
+        <!--</property>-->
+    <!--</bean>-->
+
+
     <beans profile="MYSQL">
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
             <property name="driverClass">

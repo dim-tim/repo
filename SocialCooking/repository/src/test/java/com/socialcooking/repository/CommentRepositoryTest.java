@@ -2,6 +2,7 @@ package com.socialcooking.repository;
 
 import com.socialcooking.domain.Comment;
 import org.joda.time.LocalDateTime;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ import static junit.framework.Assert.assertNotNull;
 public class CommentRepositoryTest {
 
     @Autowired
-    private CommentRepository commentRepository;
+    private CommentRepositoryImpl commentRepository;
+
+
+
 
     @Test
     public void findAllTest() {
