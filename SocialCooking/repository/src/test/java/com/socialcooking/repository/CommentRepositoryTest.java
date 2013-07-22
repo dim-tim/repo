@@ -29,10 +29,7 @@ import static junit.framework.Assert.assertNotNull;
 public class CommentRepositoryTest {
 
     @Autowired
-    private CommentRepositoryImpl commentRepository;
-
-
-
+    private CommentRepository commentRepository;
 
     private DataSource datasource;
 

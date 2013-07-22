@@ -1,18 +1,11 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.Delivery;
+
 /**
  * @author Mikalai Kisel
  */
 
-public interface DeliveryRepository {
+public interface DeliveryRepository extends GenericRepository <Delivery, Long> {
 
-//    public Delivery findById(Long id);
-//
-//    public List<Delivery> findAll();
-//
-//    public Delivery save(Delivery delivery);
-//
-//    public Delivery update(Delivery delivery);
-//
-//    public void delete(Delivery delivery);
 }

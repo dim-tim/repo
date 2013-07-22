@@ -1,17 +1,11 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.Comment;
+
 /**
  * @author Mikalai Kisel
  */
-public interface CommentRepository {
+public interface CommentRepository extends GenericRepository<Comment, Long>{
 
-//    public Comment findById(Long id);
-//
-//    public List<Comment> findAll();
-//
-//    public Comment save(Comment comment);
-//
-//    public Comment update(Comment comment);
-//
-//    public void delete(Comment comment);
+
 }

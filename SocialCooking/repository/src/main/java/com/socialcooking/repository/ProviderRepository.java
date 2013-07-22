@@ -1,17 +1,10 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.Provider;
+
 /**
  * @author Mikalai Kisel
  */
-public interface ProviderRepository {
+public interface ProviderRepository extends GenericRepository<Provider, String> {
 
-//    public Provider findById(String name);
-//
-//    public List<Provider> findAll();
-//
-//    public Provider save(Provider provider);
-//
-//    public Provider update(Provider provider);
-//
-//    public void delete(Provider provider);
 }

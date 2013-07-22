@@ -23,7 +23,7 @@ import static junit.framework.Assert.assertNotNull;
 public class SectionRepositoryTest {
 
     @Autowired
-    private SectionRepositoryImpl sectionRepository;
+    private SectionRepository sectionRepository;
 
     @Test
     public void findAllTest() {

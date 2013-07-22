@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.EntityManager;
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Mikalai Kisel
  */
 
-
+@Transactional
 public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @PersistenceContext
@@ -68,26 +69,26 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @Override
     public T save(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.persist(entity);
-        tm.commit(status);
+//        tm.commit(status);
         return entity;
     }
 
     @Override
     public T update(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.merge(entity);
-        tm.commit(status);
+//        tm.commit(status);
         return entity;
 
     }
 
     @Override
     public void delete(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         T mergedEntity = em.merge(entity);
         em.remove(mergedEntity);
-        tm.commit(status);
+//        tm.commit(status);
     }
 }

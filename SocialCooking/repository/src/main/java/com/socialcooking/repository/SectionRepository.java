@@ -1,19 +1,13 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.Section;
+
 /**
  * @author Mikalai Kisel
  */
 
-public interface SectionRepository {
+public interface SectionRepository extends GenericRepository<Section, String>{
 
-//    public Section findById(String name);
-//
-//    public List<Section> findAll();
-//
-//    public Section save(Section section);
-//
-//    public Section update(Section section);
-//
-//    public void delete(Section section);
+
 
 }

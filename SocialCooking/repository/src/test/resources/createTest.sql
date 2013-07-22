@@ -56,4 +56,18 @@ CREATE  TABLE  provider (
   PRIMARY KEY (provider_name))
 ;
 
+-- -----------------------------------------------------
+-- Table recipe
+-- -----------------------------------------------------
+CREATE  TABLE  recipe (
+  id_recipe INT NOT NULL AUTO_INCREMENT ,
+  recipe_name VARCHAR(40) NOT NULL ,
+  photo_path VARCHAR(50)  ,
+  description LONGTEXT NOT NULL ,
+  accepted TINYINT(1) NULL ,
+  positive_marks INT,
+  negative_marks INT,
+  PRIMARY KEY (id_recipe))
+;
+
 

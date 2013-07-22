@@ -1,17 +1,11 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.Ingredient;
+
 /**
  * @author Mikalai Kisel
  */
-public interface IngredientRepository {
+public interface IngredientRepository extends GenericRepository <Ingredient, Long> {
 
-//    public Ingredient findById(Long id);
-//
-//    public List<Ingredient> findAll();
-//
-//    public Ingredient save(Ingredient ingredient);
-//
-//    public Ingredient update(Ingredient ingredient);
-//
-//    public void delete(Ingredient ingredient);
+
 }

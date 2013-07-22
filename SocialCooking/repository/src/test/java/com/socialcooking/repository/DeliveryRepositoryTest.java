@@ -25,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 public class DeliveryRepositoryTest {
 
     @Autowired
-    private DeliveryRepositoryImpl deliveryRepository;
+    private DeliveryRepository deliveryRepository;
 
     @Test
     public void findAllTest() {

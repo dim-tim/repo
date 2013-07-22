@@ -17,3 +17,7 @@ INSERT INTO ingredient VALUES(null, 'Масло', '', '1 уп');
 INSERT INTO provider VALUES ('Ресторан у дома', 'Доставка по Бресту', 'Работают проф повара', true, '2013-07-19', 14, 5);
 INSERT INTO provider VALUES ('Националь', 'Доставка по Бресту', 'Работают проф повара', true, '2013-07-20', 21, 2);
 INSERT INTO provider VALUES ('Ресторан Дружба', 'Доставка по Минску', 'Работают проф повара', true, '2013-07-21', 21, 5);
+
+INSERT INTO recipe VALUES (null, 'фото1', 'D:/1.jpeg', 'Блюдо1', true, 4, 1);
+INSERT INTO recipe VALUES (null, 'фото2', 'D:/2.jpeg', 'Блюдо2', true, 9, 1);
+INSERT INTO recipe VALUES (null, 'фото3', 'D:/3.jpeg', 'Блюдо3', true, 4, 7);
