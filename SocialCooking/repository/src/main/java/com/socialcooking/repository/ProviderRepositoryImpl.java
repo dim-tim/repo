@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Provider;
+import com.socialcooking.repository.api.ProviderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,7 @@ import java.util.List;
 @Service("ProviderRepository")
 @Repository
 @Transactional
-public class ProviderRepositoryImpl implements ProviderRepository{
+public class ProviderRepositoryImpl implements ProviderRepository {
 
     @PersistenceContext
     private EntityManager em;

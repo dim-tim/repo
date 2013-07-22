@@ -15,7 +15,7 @@ public class Ingredient {
     private Long id;
 
     @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
-    @JoinColumn(name="recipe_name")
+    @JoinColumn(name="recipe_recipe_id")
     private Recipe recipe;
 
     @Column(name = "name_ingredient")

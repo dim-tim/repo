@@ -1,4 +1,4 @@
-package com.socialcooking.repository;
+package com.socialcooking.repository.api;
 
 import com.socialcooking.domain.Ingredient;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Mikalai Kisel
  */
-public interface IngredientRepository {
+public interface IngredientRepository extends IGenericRepository<Ingredient> {
 
     public Ingredient findById(Long id);
 

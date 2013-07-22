@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Section;
+import com.socialcooking.repository.api.SectionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ import java.util.List;
 @Service("SectionRepository")
 @Repository
 @Transactional
-public class SectionRepositoryImpl implements SectionRepository{
+public class SectionRepositoryImpl implements SectionRepository {
 
     @PersistenceContext
     private EntityManager em;

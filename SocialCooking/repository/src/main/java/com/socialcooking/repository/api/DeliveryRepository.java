@@ -1,4 +1,4 @@
-package com.socialcooking.repository;
+package com.socialcooking.repository.api;
 
 import com.socialcooking.domain.Comment;
 import com.socialcooking.domain.Delivery;
@@ -9,7 +9,7 @@ import java.util.List;
  * @author Mikalai Kisel
  */
 
-public interface DeliveryRepository {
+public interface DeliveryRepository extends IGenericRepository<Delivery> {
 
     public Delivery findById(Long id);
 

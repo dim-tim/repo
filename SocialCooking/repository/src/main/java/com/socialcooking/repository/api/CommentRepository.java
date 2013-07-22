@@ -1,4 +1,4 @@
-package com.socialcooking.repository;
+package com.socialcooking.repository.api;
 
 import com.socialcooking.domain.Comment;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Mikalai Kisel
  */
-public interface CommentRepository {
+public interface CommentRepository extends IGenericRepository<Comment> {
 
     public Comment findById(Long id);
 

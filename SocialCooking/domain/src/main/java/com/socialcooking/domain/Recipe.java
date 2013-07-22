@@ -6,10 +6,14 @@ import javax.persistence.*;
 @Table(name = "recipe")
 @NamedQueries({
         @NamedQuery(name = "Recipe.findAll", query = "select r from Recipe r"),
-        @NamedQuery(name = "Recipe.findById", query = "select r from Recipe r where r.name = :name")})
+        @NamedQuery(name = "Recipe.findById", query = "select r from Recipe r where r.id = :id")})
 public class Recipe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recipe_id")
+    private Long id;
+
     @Column(name = "recipe_name")
     private String name;
 
@@ -38,6 +42,14 @@ public class Recipe {
     private Integer countOfNegativeMarks;
 
     public Recipe() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

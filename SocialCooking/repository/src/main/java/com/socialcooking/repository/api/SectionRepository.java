@@ -1,4 +1,4 @@
-package com.socialcooking.repository;
+package com.socialcooking.repository.api;
 
 import com.socialcooking.domain.Section;
 
@@ -8,7 +8,10 @@ import java.util.List;
  * @author Mikalai Kisel
  */
 
-public interface SectionRepository {
+public interface SectionRepository extends IGenericRepository<Section> {
+
+
+    //TODO переопределить методы у которых в параметрах передается id (т.к. здесь тип id - String)
 
     public Section findById(String name);
 

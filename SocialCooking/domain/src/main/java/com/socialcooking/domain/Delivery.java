@@ -15,11 +15,11 @@ public class Delivery {
     private Long id;
 
     @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
-    @JoinColumn(name="provider_name")
+    @JoinColumn(name="provider_id_provider")
     private Provider provider;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="recipe_name")
+    @JoinColumn(name="recipe_recipe_id")
     private Recipe recipe;
 
     @Column(name = "price")

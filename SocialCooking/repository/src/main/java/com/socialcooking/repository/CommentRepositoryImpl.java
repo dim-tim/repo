@@ -1,7 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Comment;
-import com.socialcooking.domain.Section;
+import com.socialcooking.repository.api.CommentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,7 @@ import java.util.List;
 @Service("CommentRepository")
 @Repository
 @Transactional
-public class CommentRepositoryImpl implements CommentRepository{
+public class CommentRepositoryImpl implements CommentRepository {
 
     @PersistenceContext
     private EntityManager em;

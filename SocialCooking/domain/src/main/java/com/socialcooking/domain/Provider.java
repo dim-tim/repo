@@ -13,6 +13,10 @@ import javax.persistence.*;
 public class Provider {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comment")
+    private Long id;
+
     @Column(name = "provider_name")
     private String name;
 
@@ -40,6 +44,14 @@ public class Provider {
     private Integer countOfNegativeMarks;
 
     public Provider() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

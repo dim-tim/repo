@@ -21,7 +21,7 @@ public class Comment {
     private User user;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="recipe_name")
+    @JoinColumn(name="recipe_recipe_id")
     private Recipe recipe;
 
     @Column(name = "content")
@@ -98,21 +98,7 @@ public class Comment {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 
     @Override
     public boolean equals(Object o) {
