@@ -6,7 +6,7 @@ import org.joda.time.LocalDateTime;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order")
+@Table(name = "user_order")
 @NamedQueries({
         @NamedQuery(name = "Order.findAll", query = "select o from Order o"),
         @NamedQuery(name = "Order.findById", query = "select o from Order o where o.id = :id")})
