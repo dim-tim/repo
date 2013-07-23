@@ -1,6 +1,8 @@
 package com.socialcooking.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -10,6 +12,8 @@ public class Role {
     private Long id_role;
     private String roleName;
     private String description;
+
+    private Set<User> users = new HashSet<User>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +44,25 @@ public class Role {
         this.description = description;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_has_role",
+            joinColumns = @JoinColumn(name = "id_role_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_user_fk"))
+    public Set<User> getUsers() {
+        return users;
+    }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id_role=" + id_role +
+                ", roleName='" + roleName + '\'' +
+                ", description='" + description + '\'' +
+                ", users=" + users +
+                '}';
+    }
 }

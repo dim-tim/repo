@@ -48,6 +48,7 @@ public class CommentRepositoryTest {
         Comment expectedComment = new Comment("Очередное сообщение", new LocalDateTime("2013-07-20T05:25:00"), 3, 3);
         Comment realComment = commentRepository.save(expectedComment);
         assertEquals(expectedComment, realComment);
+
     }
 
     @Test(expected = javax.persistence.NoResultException.class)

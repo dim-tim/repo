@@ -1,10 +1,12 @@
 package com.socialcooking.domain;
 
 
-import org.joda.time.DateTime;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
@@ -29,7 +31,10 @@ public class User {
     private Integer countOfPositiveMarks;
     private Integer countOfNegativeMarks;
 
-    private DateTime dateRegistration;
+    private LocalDateTime dateRegistration;
+
+    //for many to many mapping
+    private Set<Role> roles = new HashSet<Role>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,6 +93,7 @@ public class User {
     }
 
     @Column(name = "birth_date")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getBirthday() {
         return birthday;
     }
@@ -152,11 +158,12 @@ public class User {
     }
 
     @Column(name = "registration_date")
-    public DateTime getDateRegistration() {
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    public LocalDateTime getDateRegistration() {
         return dateRegistration;
     }
 
-    public void setDateRegistration(DateTime dateRegistration) {
+    public void setDateRegistration(LocalDateTime dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
 
@@ -186,5 +193,23 @@ public class User {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+
+//    @ManyToMany
+//    @JoinTable(name = "user_has_role", joinColumns = @JoinColumn(name = "ID_USER"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
+
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @ManyToMany
+    @JoinTable(name = "app_user_has_role",
+            joinColumns = @JoinColumn(name = "id_app_user_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
