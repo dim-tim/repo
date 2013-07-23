@@ -1,10 +1,13 @@
 package com.socialcooking.domain;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.*;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,16 +16,16 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "select u from User u"),
         @NamedQuery(name = "User.findById", query = "select u from User u where u.login = :login")})
-public class User {
+public class User extends DomainObject{
 
-    @Id
-    @Column(name = "user_login")
+    @Column(name = "login")
+    @NotEmpty(message = "Login of the user cannot be empty or null")
     private String login;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "app_user_has_role",
-            joinColumns = @JoinColumn(name = "user_login"),
-            inverseJoinColumns = @JoinColumn(name = "role_name"))
+    @JoinTable(name = "role_has_app_user",
+            joinColumns = @JoinColumn(name = "id_app_user_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
     private Set<Role> roles = new HashSet<Role>();
 
     @Column(name = "password")
@@ -203,6 +206,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         User user = (User) o;
 
@@ -220,6 +224,7 @@ public class User {
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (photoPath != null ? !photoPath.equals(user.photoPath) : user.photoPath != null) return false;
         if (rating != null ? !rating.equals(user.rating) : user.rating != null) return false;
+        if (roles != null ? !roles.equals(user.roles) : user.roles != null) return false;
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
         if (telephone != null ? !telephone.equals(user.telephone) : user.telephone != null) return false;
 
@@ -228,7 +233,9 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = login != null ? login.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);

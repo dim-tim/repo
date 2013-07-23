@@ -1,21 +1,23 @@
 package com.socialcooking.repository.api;
 
 
+import com.socialcooking.domain.DomainObject;
+
 import java.util.Collection;
 import java.util.List;
 
-public interface IGenericRepository<T> {
+public interface IGenericRepository<T extends DomainObject> {
 
     public T saveOrUpdate(T entity)
             throws IllegalArgumentException;
 
-    public void delEntity(Long id)
+    public void delEntityById(Long id)
             throws IllegalArgumentException;
 
     public void delEntity(T entity)
             throws IllegalArgumentException;
 
-    public void delAllEntities(Collection<Long> ids)
+    public void delAllEntitiesByIds(Collection<Long> ids)
             throws IllegalArgumentException;
 
     public T getEntityById(Long id)

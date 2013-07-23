@@ -7,15 +7,10 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Ingredient.findAll", query = "select ing from Ingredient ing"),
         @NamedQuery(name = "Ingredient.findById", query = "select ing from Ingredient ing where ing.id = :id")})
-public class Ingredient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ingredient")
-    private Long id;
+public class Ingredient extends DomainObject{
 
     @ManyToOne(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
-    @JoinColumn(name="recipe_recipe_id")
+    @JoinColumn(name="id_recipe_fk")
     private Recipe recipe;
 
     @Column(name = "name_ingredient")
@@ -32,7 +27,7 @@ public class Ingredient {
     }
 
     public Ingredient(Long id, String name, String comment, String quantity) {
-        this.id = id;
+        setId(id);
         this.name = name;
         this.comment = comment;
         this.quantity = quantity;
@@ -42,14 +37,6 @@ public class Ingredient {
         this.name = name;
         this.comment = comment;
         this.quantity = quantity;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 
@@ -91,20 +78,22 @@ public class Ingredient {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Ingredient that = (Ingredient) o;
 
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
+        if (recipe != null ? !recipe.equals(that.recipe) : that.recipe != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (recipe != null ? recipe.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
