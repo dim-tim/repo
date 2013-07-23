@@ -10,32 +10,37 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Provider.findAll", query = "select p from Provider p"),
         @NamedQuery(name = "Provider.findById", query = "select p from Provider p where p.name = :name")})
-public class Provider {
+public class Provider extends DomainObject{
 
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_app_user_fk")
+    private User user;
+
+    @Column(name = "provider_name")
     private String name;
+
+    @Column(name = "terms_of_delivery")
     private String termsOfDelivery;
+
+    @Column(name = "about_company")
     private String aboutCompany;
+
+    @Column(name = "accepted")
     private Boolean accepted;
+
+    @Column(name = "registration_date")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime registrationDate;
+
+    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
+
+    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
 
     public Provider() {
-
     }
 
-    public Provider(String name, String termsOfDelivery, Boolean accepted, String aboutCompany, LocalDateTime registrationDate, Integer countOfPositiveMarks, Integer countOfNegativeMarks) {
-        this.name = name;
-        this.termsOfDelivery = termsOfDelivery;
-        this.accepted = accepted;
-        this.aboutCompany = aboutCompany;
-        this.registrationDate = registrationDate;
-        this.countOfPositiveMarks = countOfPositiveMarks;
-        this.countOfNegativeMarks = countOfNegativeMarks;
-    }
-
-    @Id
-    @Column(name = "provider_name")
     public String getName() {
         return name;
     }
@@ -44,7 +49,7 @@ public class Provider {
         this.name = name;
     }
 
-    @Column(name = "terms_of_delivery")
+
     public String getTermsOfDelivery() {
         return termsOfDelivery;
     }
@@ -53,7 +58,6 @@ public class Provider {
         this.termsOfDelivery = termsOfDelivery;
     }
 
-    @Column(name = "about_company")
     public String getAboutCompany() {
         return aboutCompany;
     }
@@ -62,7 +66,6 @@ public class Provider {
         this.aboutCompany = aboutCompany;
     }
 
-    @Column(name = "accepted")
     public Boolean getAccepted() {
         return accepted;
     }
@@ -71,8 +74,7 @@ public class Provider {
         this.accepted = accepted;
     }
 
-    @Column(name = "registration_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
@@ -81,7 +83,7 @@ public class Provider {
         this.registrationDate = registrationDate;
     }
 
-    @Column(name = "positive_marks")
+
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -90,7 +92,7 @@ public class Provider {
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-    @Column(name = "negative_marks")
+
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }
@@ -99,10 +101,19 @@ public class Provider {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Provider provider = (Provider) o;
 
@@ -118,13 +129,16 @@ public class Provider {
             return false;
         if (termsOfDelivery != null ? !termsOfDelivery.equals(provider.termsOfDelivery) : provider.termsOfDelivery != null)
             return false;
+        if (user != null ? !user.equals(provider.user) : provider.user != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (termsOfDelivery != null ? termsOfDelivery.hashCode() : 0);
         result = 31 * result + (aboutCompany != null ? aboutCompany.hashCode() : 0);
         result = 31 * result + (accepted != null ? accepted.hashCode() : 0);

@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Section;
+import com.socialcooking.repository.api.SectionRepository;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.List;

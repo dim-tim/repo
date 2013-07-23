@@ -6,11 +6,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "section")
 @NamedQueries({
-@NamedQuery(name = "Section.findAll", query = "select s from Section s"),
-@NamedQuery(name = "Section.findById", query = "select s from Section s where s.name = :name")})
-public class Section {
+        @NamedQuery(name = "Section.findAll", query = "select s from Section s"),
+        @NamedQuery(name = "Section.findById", query = "select s from Section s where s.name = :name")})
+public class Section extends DomainObject{
 
+    @Column(name = "name_section")
     private String name;
+
+    @Column(name = "description")
     private String description;
 
     public Section() {
@@ -22,8 +25,6 @@ public class Section {
         this.description = description;
     }
 
-    @Id
-    @Column(name = "name_section")
     public String getName() {
         return name;
     }
@@ -32,7 +33,6 @@ public class Section {
         this.name = name;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -44,7 +44,8 @@ public class Section {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Section)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Section section = (Section) o;
 
@@ -56,16 +57,9 @@ public class Section {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Section{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }
