@@ -4,9 +4,7 @@ import com.socialcooking.domain.Ingredient;
 
 import java.util.List;
 
-/**
- * @author Mikalai Kisel
- */
+
 public interface IngredientRepository extends IGenericRepository<Ingredient> {
 
     public Ingredient findById(Long id);

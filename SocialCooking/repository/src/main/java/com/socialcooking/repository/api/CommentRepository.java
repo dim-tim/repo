@@ -4,9 +4,7 @@ import com.socialcooking.domain.Comment;
 
 import java.util.List;
 
-/**
- * @author Mikalai Kisel
- */
+
 public interface CommentRepository extends IGenericRepository<Comment> {
 
     public Comment findById(Long id);

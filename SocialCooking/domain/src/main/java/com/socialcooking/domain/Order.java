@@ -10,19 +10,15 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Order.findAll", query = "select o from Order o"),
         @NamedQuery(name = "Order.findById", query = "select o from Order o where o.id = :id")})
-public class Order {
+public class Order extends DomainObject{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_order")
-    private Long id;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="id_delivery")
+    @JoinColumn(name="id_delivery_fk")
     private Delivery delivery;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="user_login")
+    @JoinColumn(name="id_app_user_fk")
     private User user;
 
     @Column(name = "date")
@@ -30,14 +26,6 @@ public class Order {
     private LocalDateTime date;
 
     public Order() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getDate() {
@@ -68,18 +56,22 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Order order = (Order) o;
 
         if (date != null ? !date.equals(order.date) : order.date != null) return false;
-        if (id != null ? !id.equals(order.id) : order.id != null) return false;
+        if (delivery != null ? !delivery.equals(order.delivery) : order.delivery != null) return false;
+        if (user != null ? !user.equals(order.user) : order.user != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (delivery != null ? delivery.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }

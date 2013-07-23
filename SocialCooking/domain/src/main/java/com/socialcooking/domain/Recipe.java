@@ -7,23 +7,18 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Recipe.findAll", query = "select r from Recipe r"),
         @NamedQuery(name = "Recipe.findById", query = "select r from Recipe r where r.id = :id")})
-public class Recipe {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipe_id")
-    private Long id;
-
-    @Column(name = "recipe_name")
-    private String name;
+public class Recipe extends DomainObject{
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="name_section")
+    @JoinColumn(name="id_section_fk")
     private Section section;
 
     @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="user_login")
+    @JoinColumn(name="id_app_user_fk")
     private User user;
+
+    @Column(name = "recipe_name")
+    private String name;
 
     @Column(name = "photo_path")
     private String photo;
@@ -42,14 +37,6 @@ public class Recipe {
     private Integer countOfNegativeMarks;
 
     public Recipe() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -120,6 +107,7 @@ public class Recipe {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Recipe recipe = (Recipe) o;
 
@@ -131,13 +119,18 @@ public class Recipe {
         if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
         if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
         if (photo != null ? !photo.equals(recipe.photo) : recipe.photo != null) return false;
+        if (section != null ? !section.equals(recipe.section) : recipe.section != null) return false;
+        if (user != null ? !user.equals(recipe.user) : recipe.user != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (section != null ? section.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (accepted ? 1 : 0);

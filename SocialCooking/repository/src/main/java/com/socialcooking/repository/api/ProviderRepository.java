@@ -1,13 +1,9 @@
 package com.socialcooking.repository.api;
 
-import com.socialcooking.domain.Ingredient;
 import com.socialcooking.domain.Provider;
 
 import java.util.List;
 
-/**
- * @author Mikalai Kisel
- */
 public interface ProviderRepository extends IGenericRepository<Provider> {
 
     public Provider findById(Long id);

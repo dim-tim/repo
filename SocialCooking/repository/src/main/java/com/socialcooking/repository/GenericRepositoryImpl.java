@@ -8,17 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
-public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> {
+public abstract class GenericRepositoryImpl<T, K> implements IGenericRepository<T, K> {
 
     private static final String QUERY_COUNT_ALL = "SELECT COUNT(x) FROM %s x";
     private static final String QUERY_SELECT_ALL = "SELECT x FROM %s x";
     private static final String QUERY_SELECT_BY_ID_LIST = "SELECT x FROM %s x WHERE x.id IN (?1)";
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     protected Class<T> persistentClass;
 
@@ -27,12 +26,12 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
         this.persistentClass = persistentClass;
     }
 
-    public EntityManager getEm() {
-        return em;
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -50,9 +49,9 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
 
         Query query;
         if (namedQuery) {
-            query = em.createNamedQuery(queryOrQueryName);
+            query = entityManager.createNamedQuery(queryOrQueryName);
         } else {
-            query = em.createQuery(queryOrQueryName);
+            query = entityManager.createQuery(queryOrQueryName);
         }
 
         if (parameters.length > 0) {
@@ -61,16 +60,6 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
             }
         }
 
-
-//        if (singleResult) {
-//            if (list != null && list.size() != 0) {
-//                result = (REZ) list.get(0);
-//            } else {
-//                result = null;
-//            }
-//        } else {
-//            result = (REZ) list;
-//        }
 
         if (singleResult) {
             if (query != null) {
@@ -85,38 +74,69 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
         return result;
     }
 
-
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    protected int executeUpdateQuery(final String queryOrQueryName,
-                                     final boolean namedQuery, final Object... parameters)
-            throws IllegalArgumentException {
-
-        if (queryOrQueryName == null) {
-            throw new IllegalArgumentException(
-                    "Query for executing cannot be null");
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public long getAllEntitiesCount() {
+        try {
+            return executeQuery(String.format(QUERY_COUNT_ALL, persistentClass.getSimpleName()), false, true);
+        } catch (Exception e) {
+            return 0;
         }
-
-        Object rez;
-
-        Query query;
-        if (namedQuery) {
-            query = em.createNamedQuery(queryOrQueryName);
-        } else {
-            query = em.createQuery(queryOrQueryName);
-        }
-
-        if (parameters.length > 0) {
-            for (int i = 0; i < parameters.length; i++) {
-                query.setParameter(i + 1, parameters[i]);
-            }
-        }
-
-        rez = Integer.valueOf(query.executeUpdate());
-
-
-        return ((Integer) rez).intValue();
-
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public T save(T entity) throws IllegalArgumentException {
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity for saving cannot be null!");
+        }
+        entityManager.persist(entity);
+        return entity;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public T update(T entity) throws IllegalArgumentException {
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity for saving cannot be null!");
+        }
+        entityManager.merge(entity);
+        return entity;
+    }
+
+    //
+//
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    protected int executeUpdateQuery(final String queryOrQueryName,
+//                                     final boolean namedQuery, final Object... parameters)
+//            throws IllegalArgumentException {
+//
+//        if (queryOrQueryName == null) {
+//            throw new IllegalArgumentException(
+//                    "Query for executing cannot be null");
+//        }
+//
+//        Object rez;
+//
+//        Query query;
+//        if (namedQuery) {
+//            query = em.createNamedQuery(queryOrQueryName);
+//        } else {
+//            query = em.createQuery(queryOrQueryName);
+//        }
+//
+//        if (parameters.length > 0) {
+//            for (int i = 0; i < parameters.length; i++) {
+//                query.setParameter(i + 1, parameters[i]);
+//            }
+//        }
+//
+//        rez = Integer.valueOf(query.executeUpdate());
+//
+//
+//        return ((Integer) rez).intValue();
+//
+//    }
 
 //    @Override
 //    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -168,50 +188,5 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
 //        }
 //    }
 
-    @Override
-    public void delEntity(Long id) throws IllegalArgumentException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
 
-    @Override
-    public void delEntity(T entity) throws IllegalArgumentException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void delAllEntities(Collection<Long> ids) throws IllegalArgumentException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public T getEntityById(Long id) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<T> getAllEntities() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<T> getEntitiesByIds(List<Long> ids) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public long getAllEntitiesCount() {
-        try {
-            return executeQuery(
-                    String.format(QUERY_COUNT_ALL,
-                            persistentClass.getSimpleName()), false, true);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    @Override
-    public List<T> getAllSorted(String propertySortBy, boolean asc) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
