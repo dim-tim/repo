@@ -2,9 +2,10 @@
 -- Table section
 -- -----------------------------------------------------
 CREATE  TABLE  section (
+  id_section INT NOT NULL AUTO_INCREMENT ,
   name_section VARCHAR(40) NOT NULL ,
   description VARCHAR(250) NULL ,
-  PRIMARY KEY (name_section) )
+  PRIMARY KEY (id_section) )
 ;
 
 
@@ -46,6 +47,7 @@ CREATE  TABLE  ingredient (
 -- Table provider
 -- -----------------------------------------------------
 CREATE  TABLE  provider (
+  id_provider INT NOT NULL AUTO_INCREMENT ,
   provider_name VARCHAR(100) NOT NULL ,
   terms_of_delivery TEXT NOT NULL ,
   about_company TEXT NULL ,
@@ -53,7 +55,7 @@ CREATE  TABLE  provider (
   registration_date TIMESTAMP NOT NULL,
   positive_marks INT,
   negative_marks INT,
-  PRIMARY KEY (provider_name))
+  PRIMARY KEY (id_provider))
 ;
 
 -- -----------------------------------------------------
@@ -70,4 +72,48 @@ CREATE  TABLE  recipe (
   PRIMARY KEY (id_recipe))
 ;
 
+-- -----------------------------------------------------
+-- Table role
+-- -----------------------------------------------------
+CREATE  TABLE  role (
+  id_role INT NOT NULL AUTO_INCREMENT ,
+  role_name VARCHAR(30) NOT NULL ,
+  description VARCHAR(250) NULL ,
+  PRIMARY KEY (id_role) )
+;
+
+-- -----------------------------------------------------
+-- Table order
+-- -----------------------------------------------------
+
+CREATE TABLE app_order (
+   id_order INT NOT NULL AUTO_INCREMENT ,
+   date TIMESTAMP NOT NULL ,
+   PRIMARY KEY (id_order)
+);
+
+-- -----------------------------------------------------
+-- Table app_user
+-- -----------------------------------------------------
+CREATE  TABLE  app_user (
+  id_app_user INT NOT NULL AUTO_INCREMENT ,
+  user_login VARCHAR(20) NOT NULL ,
+  password VARCHAR(45) NOT NULL ,
+  name VARCHAR(45) NOT NULL ,
+  surname VARCHAR(45) NOT NULL ,
+  email VARCHAR(150) NOT NULL ,
+  photo_path VARCHAR(50) NULL ,
+  birth_date DATE NULL ,
+  gender VARCHAR(40) NULL ,
+  telephone INT ,
+  country VARCHAR(45) NULL ,
+  city VARCHAR(45) NULL ,
+  address VARCHAR(45) NULL ,
+  about LONGTEXT NULL ,
+  positive_marks INT ,
+  negative_marks INT ,
+  registration_date DATE NOT NULL ,
+  PRIMARY KEY (id_app_user) )
+
+;
 

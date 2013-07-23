@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Provider;
+import com.socialcooking.repository.api.ProviderRepository;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,36 +36,36 @@ public class ProviderRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        Provider expectedProvider = new Provider("Ресторан у дома", "Доставка по Бресту", true, "Работают проф повара", new LocalDateTime("2013-07-19"), 14, 5);
-        Provider realProvider = providerRepository.findById("Ресторан у дома");
+        Provider expectedProvider = new Provider(1L, "Ресторан у дома", "Доставка по Бресту", "Работают проф повара", true, new LocalDateTime("2013-07-19"), 14, 5);
+        Provider realProvider = providerRepository.findById(1L);
         assertEquals(expectedProvider, realProvider);
     }
 
     @Test
     public void saveTest() {
-        Provider expectedProvider = new Provider("Ресторан Белая Лошадь", "Доставка по Бресту", true, "Работают проф повара", new LocalDateTime("2013-07-19"), 14, 5);
+        Provider expectedProvider = new Provider("Ресторан Белая Лошадь", "Доставка по Бресту", "Работают проф повара", true,  new LocalDateTime("2013-07-19"), 14, 5);
         Provider realProvider = providerRepository.save(expectedProvider);
         assertEquals(expectedProvider, realProvider);
     }
 
     @Test
     public void updateTest() {
-        Provider provider = providerRepository.findById("Ресторан Дружба");
+        Provider provider = providerRepository.findById(3L);
         assertEquals("Доставка по Минску", provider.getTermsOfDelivery());
 
         provider.setTermsOfDelivery("Доставка по Минску и Бресте");
         providerRepository.update(provider);
 
-        provider = providerRepository.findById("Ресторан Дружба");
+        provider = providerRepository.findById(3L);
         assertEquals("Доставка по Минску и Бресте", provider.getTermsOfDelivery());
     }
 
     @Test(expected = javax.persistence.NoResultException.class)
     public void deleteTest() {
-        Provider provider = providerRepository.findById("Националь");
+        Provider provider = providerRepository.findById(2L);
 
         providerRepository.delete(provider);
 
-        providerRepository.findById("Националь");
+        providerRepository.findById(2L);
     }
 }

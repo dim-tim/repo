@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Comment;
+import com.socialcooking.repository.api.CommentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("CommentRepository")
 @Repository
 @Transactional
-public class CommentRepositoryImpl extends GenericRepositoryImpl<Comment, Long> implements CommentRepository{
+public class CommentRepositoryImpl extends GenericRepositoryImpl<Comment, Long> implements CommentRepository {
 
     private Logger log = LoggerFactory.getLogger(CommentRepository.class);
 

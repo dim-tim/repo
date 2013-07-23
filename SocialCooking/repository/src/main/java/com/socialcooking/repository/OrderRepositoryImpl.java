@@ -1,7 +1,7 @@
 package com.socialcooking.repository;
 
-import com.socialcooking.domain.Recipe;
-import com.socialcooking.repository.api.RecipeRepository;
+import com.socialcooking.domain.Order;
+import com.socialcooking.repository.api.OrderRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Mikalai Kisel
  */
-@Service("RecipeRepository")
+
+@Service("OrderRepository")
 @Repository
 @Transactional
-public class RecipeRepositoryImpl extends GenericRepositoryImpl<Recipe, Long> implements RecipeRepository {
-
+public class OrderRepositoryImpl extends GenericRepositoryImpl<Order, Long> implements OrderRepository{
 }

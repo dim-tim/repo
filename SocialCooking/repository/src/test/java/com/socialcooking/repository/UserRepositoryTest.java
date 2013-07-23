@@ -1,7 +1,7 @@
 package com.socialcooking.repository;
 
-import com.socialcooking.domain.Role;
-import com.socialcooking.repository.api.RoleRepository;
+import com.socialcooking.domain.User;
+import com.socialcooking.repository.api.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +16,19 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Mikalai Kisel
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
-//May be H2 or MYSQL
+//May be H2 or MYSQL. MySQL is not work.
 @ActiveProfiles("H2")
-public class RoleRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
-    private RoleRepository roleRepository;
+    private UserRepository userRepository;
 
     @Test
     public void findAllTest() {
-        List<Role> roles = roleRepository.findAll();
-        assertNotNull(roles);
+        List<User> users = userRepository.findAll();
+        assertNotNull(users);
     }
 }

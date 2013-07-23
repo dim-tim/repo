@@ -5,11 +5,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "section")
-@NamedQueries({
-@NamedQuery(name = "Section.findAll", query = "select s from Section s"),
-@NamedQuery(name = "Section.findById", query = "select s from Section s where s.name = :name")})
 public class Section {
 
+    private Long id;
     private String name;
     private String description;
 
@@ -23,6 +21,16 @@ public class Section {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_section")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Column(name = "name_section")
     public String getName() {
         return name;

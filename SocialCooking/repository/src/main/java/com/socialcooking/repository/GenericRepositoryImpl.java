@@ -1,12 +1,9 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.repository.api.GenericRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,15 +21,15 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
-    private JpaTransactionManager tm;
-
     private Logger log = LoggerFactory.getLogger(GenericRepository.class);
 
     protected Class<T> persistentClass;
 
     String genericFindByIdQuery = "SELECT x FROM %s x WHERE x.id = :id";
     String genericFindAllQuery = "SELECT x FROM %s x";
+    String genericDeleteByIdQuery = "DELETE FROM %s x WHERE x.id = :id";
+    String genericDeleteAllQuery = "DELETE FROM %s";
+    String genericCountRowQuery = "SELECT COUNT(id) FROM %s";
 
 
     public GenericRepositoryImpl() {
@@ -40,15 +37,8 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public Class<T> getPersistentClass() {
-        return persistentClass;
-    }
-
-    public void setPersistentClass(Class<T> persistentClass) {
-        this.persistentClass = persistentClass;
-    }
-
     @Override
+    @Transactional(readOnly = true)
     public T findById(ID id) {
         String findByIdQuery = String.format(genericFindByIdQuery, persistentClass.getSimpleName());
 
@@ -59,6 +49,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<T> findAll() {
         String findAllQuery = String.format(genericFindAllQuery, persistentClass.getSimpleName());
 
@@ -69,26 +60,47 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @Override
     public T save(T entity) {
-//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.persist(entity);
-//        tm.commit(status);
         return entity;
     }
 
     @Override
     public T update(T entity) {
-//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.merge(entity);
-//        tm.commit(status);
         return entity;
 
     }
 
     @Override
     public void delete(T entity) {
-//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         T mergedEntity = em.merge(entity);
         em.remove(mergedEntity);
-//        tm.commit(status);
+    }
+
+    @Override
+    public void deleteById(ID id) {
+        String deleteByIdQuery = String.format(genericDeleteByIdQuery, persistentClass.getSimpleName());
+
+        Query query = em.createQuery(deleteByIdQuery);
+        query.setParameter("id", id);
+
+        query.executeUpdate();
+    }
+
+    @Override
+    public void deleteAll() {
+        String deleteAllQuery = String.format(genericDeleteAllQuery, persistentClass.getSimpleName());
+
+        Query query = em.createQuery(deleteAllQuery);
+        query.executeUpdate();
+    }
+
+    @Override
+    public long count() {
+        String countRowQuery = String.format(genericCountRowQuery, persistentClass.getSimpleName());
+
+        Query query = em.createQuery(countRowQuery);
+
+        return (Long) query.getSingleResult();
     }
 }

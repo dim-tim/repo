@@ -7,9 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "app_comment")
-@NamedQueries({
-        @NamedQuery(name = "Comment.findAll", query = "select c from Comment c"),
-        @NamedQuery(name = "Comment.findById", query = "select c from Comment c where c.id = :id")})
 public class Comment {
 
     private Long id;

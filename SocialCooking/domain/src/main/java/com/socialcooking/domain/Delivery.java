@@ -5,9 +5,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "delivery")
-@NamedQueries({
-        @NamedQuery(name = "Delivery.findAll", query = "select d from Delivery d"),
-        @NamedQuery(name = "Delivery.findById", query = "select d from Delivery d where d.id = :id")})
 public class Delivery {
 
     private Long id;

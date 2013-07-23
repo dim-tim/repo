@@ -1,7 +1,7 @@
 package com.socialcooking.repository;
 
-import com.socialcooking.domain.Role;
-import com.socialcooking.repository.api.RoleRepository;
+import com.socialcooking.domain.Order;
+import com.socialcooking.repository.api.OrderRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +16,21 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Mikalai Kisel
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
 //May be H2 or MYSQL
 @ActiveProfiles("H2")
-public class RoleRepositoryTest {
+public class OrderRepositoryTest {
 
     @Autowired
-    private RoleRepository roleRepository;
+    private OrderRepository orderRepository;
 
     @Test
     public void findAllTest() {
-        List<Role> roles = roleRepository.findAll();
-        assertNotNull(roles);
+        List<Order> orders = orderRepository.findAll();
+        assertNotNull(orders);
     }
+
+
 }

@@ -4,15 +4,24 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
-@NamedQueries({
-        @NamedQuery(name = "Role.findAll", query = "select r from Role r"),
-        @NamedQuery(name = "Role.findById", query = "select r from Role r where r.roleName = :name")})
 public class Role {
 
+
+    private Long id_role;
     private String roleName;
     private String description;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_role")
+    public Long getId_role() {
+        return id_role;
+    }
+
+    public void setId_role(Long id_role) {
+        this.id_role = id_role;
+    }
+
     @Column(name = "role_name")
     public String getRoleName() {
         return roleName;

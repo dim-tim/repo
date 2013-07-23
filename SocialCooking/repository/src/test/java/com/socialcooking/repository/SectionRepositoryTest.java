@@ -1,6 +1,7 @@
 package com.socialcooking.repository;
 
 import com.socialcooking.domain.Section;
+import com.socialcooking.repository.api.SectionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class SectionRepositoryTest {
 
     @Test()
     public void findByIdTest() {
-        Section section = sectionRepository.findById("Салаты");
+        Section section = sectionRepository.findById(1L);
         assertEquals("Салаты", section.getName());
         assertEquals("Легкая закуска", section.getDescription());
     }
@@ -43,31 +44,30 @@ public class SectionRepositoryTest {
         Section expectedSection = new Section("Основные блюда", "Большие по объему");
         Section realSection = sectionRepository.save(expectedSection);
         assertEquals(expectedSection, realSection);
-        realSection = sectionRepository.findById("Основные блюда");
-        assertEquals(expectedSection, realSection);
+
     }
 
     @Test(expected = javax.persistence.NoResultException.class)
     public void deleteTest() {
         Section expectedSection = new Section("Супы", "");
-        Section realSection = sectionRepository.findById("Супы");
+        Section realSection = sectionRepository.findById(2L);
         assertEquals(expectedSection, realSection);
 
         sectionRepository.delete(realSection);
 
-        realSection = sectionRepository.findById("Супы");
+        realSection = sectionRepository.findById(2L);
         assertEquals(null, realSection);
     }
 
     @Test
     public void updateTest() {
-        Section realSection = sectionRepository.findById("Напитки");
+        Section realSection = sectionRepository.findById(3L);
         assertEquals("", realSection.getDescription());
 
         realSection.setDescription("Очень вкусные");
         sectionRepository.update(realSection);
 
-        realSection = sectionRepository.findById("Напитки");
+        realSection = sectionRepository.findById(3L);
         assertEquals("Очень вкусные", realSection.getDescription());
     }
 

@@ -7,11 +7,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name= "provider")
-@NamedQueries({
-        @NamedQuery(name = "Provider.findAll", query = "select p from Provider p"),
-        @NamedQuery(name = "Provider.findById", query = "select p from Provider p where p.name = :name")})
 public class Provider {
 
+    private Long id;
     private String name;
     private String termsOfDelivery;
     private String aboutCompany;
@@ -24,17 +22,38 @@ public class Provider {
 
     }
 
-    public Provider(String name, String termsOfDelivery, Boolean accepted, String aboutCompany, LocalDateTime registrationDate, Integer countOfPositiveMarks, Integer countOfNegativeMarks) {
+    public Provider(String name, String termsOfDelivery, String aboutCompany, Boolean accepted, LocalDateTime registrationDate, Integer countOfPositiveMarks, Integer countOfNegativeMarks) {
         this.name = name;
         this.termsOfDelivery = termsOfDelivery;
-        this.accepted = accepted;
         this.aboutCompany = aboutCompany;
+        this.accepted = accepted;
+        this.registrationDate = registrationDate;
+        this.countOfPositiveMarks = countOfPositiveMarks;
+        this.countOfNegativeMarks = countOfNegativeMarks;
+    }
+
+    public Provider(Long id, String name, String termsOfDelivery, String aboutCompany, Boolean accepted, LocalDateTime registrationDate, Integer countOfPositiveMarks, Integer countOfNegativeMarks) {
+        this.id = id;
+        this.name = name;
+        this.termsOfDelivery = termsOfDelivery;
+        this.aboutCompany = aboutCompany;
+        this.accepted = accepted;
         this.registrationDate = registrationDate;
         this.countOfPositiveMarks = countOfPositiveMarks;
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_provider")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Column(name = "provider_name")
     public String getName() {
         return name;

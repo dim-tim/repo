@@ -8,18 +8,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "app_user")
-@NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "select u from User u"),
-        @NamedQuery(name = "User.findById", query = "select u from User u where u.login = :login")})
 public class User {
 
 
+    private Long id;
     private String login;
     private String password;
     private String name;
     private String surname;
     private String email;
-    private byte [] photo;
+    private String photoPath;
 
     private LocalDateTime birthday;
     private GenderType gender;
@@ -28,13 +26,22 @@ public class User {
     private String city;
     private String address;
     private String about;
-    private Double rating;
+    private Integer countOfPositiveMarks;
+    private Integer countOfNegativeMarks;
 
     private DateTime dateRegistration;
 
-
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_app_user")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Column(name = "user_login")
     public String getLogin() {
         return login;
@@ -153,24 +160,31 @@ public class User {
         this.dateRegistration = dateRegistration;
     }
 
-    @Column(name = "rating")
-    public Double getRating() {
-        return rating;
+    @Column(name = "negative_marks")
+    public Integer getCountOfNegativeMarks() {
+        return countOfNegativeMarks;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+
+    public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
+        this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    //it's for lazy download of pictures
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    @Column(name = "photo")
-    public byte[] getPhoto() {
-        return photo;
+    @Column(name = "positive_marks")
+    public Integer getCountOfPositiveMarks() {
+        return countOfPositiveMarks;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setCountOfPositiveMarks(Integer countOfPositiveMarks) {
+        this.countOfPositiveMarks = countOfPositiveMarks;
+    }
+
+    @Column(name = "photo_path")
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 }
