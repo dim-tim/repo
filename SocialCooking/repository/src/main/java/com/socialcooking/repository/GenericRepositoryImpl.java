@@ -43,7 +43,6 @@ public abstract class GenericRepositoryImpl<T extends DomainObject> implements I
     protected <REZ> REZ executeQuery(String queryOrQueryName,
                                      boolean namedQuery, boolean singleResult, Object... parameters) {
 
-
         if (queryOrQueryName == null) {
             throw new IllegalArgumentException(
                     "Query for executing cannot be null");
@@ -64,7 +63,6 @@ public abstract class GenericRepositoryImpl<T extends DomainObject> implements I
                 query.setParameter(i + 1, parameters[i]);
             }
         }
-
 
         if (singleResult) {
             if (query != null) {
@@ -113,8 +111,6 @@ public abstract class GenericRepositoryImpl<T extends DomainObject> implements I
         }
 
         return executeQuery(String.format(QUERY_SELECT_BY_ID, persistentClass.getSimpleName()), false, true);
-
-
     }
 
     @Override
@@ -210,14 +206,14 @@ public abstract class GenericRepositoryImpl<T extends DomainObject> implements I
                                             boolean asc) {
         StringBuilder sb = new StringBuilder();
         sb.append(query);
-        sb.append(" "); //$NON-NLS-1$
-        sb.append("order by "); //$NON-NLS-1$
+        sb.append(" ");
+        sb.append("order by ");
         sb.append(propertySortBy);
 
         if (asc) {
-            sb.append(" asc"); //$NON-NLS-1$
+            sb.append(" asc");
         } else {
-            sb.append(" desc"); //$NON-NLS-1$
+            sb.append(" desc");
         }
 
         String newQuery = sb.toString();
