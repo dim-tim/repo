@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 
-public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
+public class GenericRepositoryImpl<T, ID>  {
 
     @PersistenceContext
     private EntityManager em;
@@ -47,7 +47,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
         this.persistentClass = persistentClass;
     }
 
-    @Override
+//    @Override
     public T findById(ID id) {
         String findByIdQuery = String.format(genericFindByIdQuery, persistentClass.getSimpleName());
 
@@ -57,7 +57,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
         return (T) query.getSingleResult();
     }
 
-    @Override
+//    @Override
     public List<T> findAll() {
         String findAllQuery = String.format(genericFindAllQuery, persistentClass.getSimpleName());
 
@@ -66,7 +66,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
         return query.getResultList();
     }
 
-    @Override
+//    @Override
     public T save(T entity) {
         TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.persist(entity);
@@ -74,7 +74,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
         return entity;
     }
 
-    @Override
+//    @Override
     public T update(T entity) {
         TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.merge(entity);
@@ -83,7 +83,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     }
 
-    @Override
+//    @Override
     public void delete(T entity) {
         TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         T mergedEntity = em.merge(entity);
