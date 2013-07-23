@@ -35,88 +35,77 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
         this.em = em;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    protected <REZ> REZ executeQuery(String queryOrQueryName,
-                                     boolean namedQuery, boolean singleResult, Object... parameters) {
-
-
-        if (queryOrQueryName == null) {
-            throw new IllegalArgumentException(
-                    "Query for executing cannot be null");
-        }
-
-        REZ result;
-        List<?> list;
-
-        Query query;
-        if (namedQuery) {
-            query = em.createNamedQuery(queryOrQueryName);
-        } else {
-            query = em.createQuery(queryOrQueryName);
-        }
-
-        if (parameters.length > 0) {
-            for (int i = 0; i < parameters.length; i++) {
-                query.setParameter(i + 1, parameters[i]);
-            }
-        }
-
-
+//    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+//    protected <REZ> REZ executeQuery(String queryOrQueryName,
+//                                     boolean namedQuery, boolean singleResult, Object... parameters) {
+//
+//
+//        if (queryOrQueryName == null) {
+//            throw new IllegalArgumentException(
+//                    "Query for executing cannot be null");
+//        }
+//
+//        REZ result;
+//        List<?> list;
+//
+//        Query query;
+//        if (namedQuery) {
+//            query = em.createNamedQuery(queryOrQueryName);
+//        } else {
+//            query = em.createQuery(queryOrQueryName);
+//        }
+//
+//        if (parameters.length > 0) {
+//            for (int i = 0; i < parameters.length; i++) {
+//                query.setParameter(i + 1, parameters[i]);
+//            }
+//        }
+//
 //        if (singleResult) {
-//            if (list != null && list.size() != 0) {
-//                result = (REZ) list.get(0);
+//            if (query != null) {
+//                result = (REZ) query.getSingleResult();
 //            } else {
 //                result = null;
 //            }
 //        } else {
-//            result = (REZ) list;
+//            result = (REZ) query.getResultList();
 //        }
-
-        if (singleResult) {
-            if (query != null) {
-                result = (REZ) query.getSingleResult();
-            } else {
-                result = null;
-            }
-        } else {
-            result = (REZ) query.getResultList();
-        }
-
-        return result;
-    }
-
-
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    protected int executeUpdateQuery(final String queryOrQueryName,
-                                     final boolean namedQuery, final Object... parameters)
-            throws IllegalArgumentException {
-
-        if (queryOrQueryName == null) {
-            throw new IllegalArgumentException(
-                    "Query for executing cannot be null");
-        }
-
-        Object rez;
-
-        Query query;
-        if (namedQuery) {
-            query = em.createNamedQuery(queryOrQueryName);
-        } else {
-            query = em.createQuery(queryOrQueryName);
-        }
-
-        if (parameters.length > 0) {
-            for (int i = 0; i < parameters.length; i++) {
-                query.setParameter(i + 1, parameters[i]);
-            }
-        }
-
-        rez = Integer.valueOf(query.executeUpdate());
-
-
-        return ((Integer) rez).intValue();
-
-    }
+//
+//        return result;
+//    }
+//
+//
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    protected int executeUpdateQuery(final String queryOrQueryName,
+//                                     final boolean namedQuery, final Object... parameters)
+//            throws IllegalArgumentException {
+//
+//        if (queryOrQueryName == null) {
+//            throw new IllegalArgumentException(
+//                    "Query for executing cannot be null");
+//        }
+//
+//        Object rez;
+//
+//        Query query;
+//        if (namedQuery) {
+//            query = em.createNamedQuery(queryOrQueryName);
+//        } else {
+//            query = em.createQuery(queryOrQueryName);
+//        }
+//
+//        if (parameters.length > 0) {
+//            for (int i = 0; i < parameters.length; i++) {
+//                query.setParameter(i + 1, parameters[i]);
+//            }
+//        }
+//
+//        rez = Integer.valueOf(query.executeUpdate());
+//
+//
+//        return ((Integer) rez).intValue();
+//
+//    }
 
 //    @Override
 //    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -198,20 +187,4 @@ public abstract class GenericRepositoryImpl<T> implements IGenericRepository<T> 
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public long getAllEntitiesCount() {
-        try {
-            return executeQuery(
-                    String.format(QUERY_COUNT_ALL,
-                            persistentClass.getSimpleName()), false, true);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    @Override
-    public List<T> getAllSorted(String propertySortBy, boolean asc) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
