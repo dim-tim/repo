@@ -1,4 +1,4 @@
-package com.socialcooking.repository;
+package com.socialcooking.repository.api;
 
 import java.util.List;
 
@@ -17,4 +17,10 @@ public interface GenericRepository<T, ID> {
     public T update(T entity);
 
     public void delete(T entity);
+
+    public void deleteById(ID id);
+
+    public void deleteAll();
+
+    public long count();
 }

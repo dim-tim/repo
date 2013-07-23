@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.EntityManager;
@@ -17,8 +18,8 @@ import java.util.List;
  * @author Mikalai Kisel
  */
 
-
-public class GenericRepositoryImpl<T, ID>  {
+@Transactional
+public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @PersistenceContext
     private EntityManager em;
@@ -47,7 +48,7 @@ public class GenericRepositoryImpl<T, ID>  {
         this.persistentClass = persistentClass;
     }
 
-//    @Override
+    @Override
     public T findById(ID id) {
         String findByIdQuery = String.format(genericFindByIdQuery, persistentClass.getSimpleName());
 
@@ -57,7 +58,7 @@ public class GenericRepositoryImpl<T, ID>  {
         return (T) query.getSingleResult();
     }
 
-//    @Override
+    @Override
     public List<T> findAll() {
         String findAllQuery = String.format(genericFindAllQuery, persistentClass.getSimpleName());
 
@@ -66,28 +67,28 @@ public class GenericRepositoryImpl<T, ID>  {
         return query.getResultList();
     }
 
-//    @Override
+    @Override
     public T save(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.persist(entity);
-        tm.commit(status);
+//        tm.commit(status);
         return entity;
     }
 
-//    @Override
+    @Override
     public T update(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         em.merge(entity);
-        tm.commit(status);
+//        tm.commit(status);
         return entity;
 
     }
 
-//    @Override
+    @Override
     public void delete(T entity) {
-        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
+//        TransactionStatus status = tm.getTransaction(new DefaultTransactionDefinition());
         T mergedEntity = em.merge(entity);
         em.remove(mergedEntity);
-        tm.commit(status);
+//        tm.commit(status);
     }
 }

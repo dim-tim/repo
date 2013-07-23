@@ -13,6 +13,7 @@ import javax.persistence.*;
         @NamedQuery(name = "User.findById", query = "select u from User u where u.login = :login")})
 public class User {
 
+
     private String login;
     private String password;
     private String name;

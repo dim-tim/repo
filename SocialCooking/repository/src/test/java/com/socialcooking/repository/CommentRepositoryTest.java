@@ -6,10 +6,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -25,19 +29,23 @@ import static junit.framework.Assert.assertNotNull;
 public class CommentRepositoryTest {
 
     @Autowired
-    private CommentRepositoryImpl commentRepository;
+    private CommentRepository commentRepository;
+
+    private DataSource datasource;
+
+//    @BeforeClass
+//    public void setUp() {
+//        JdbcTestUtils.executeSqlScript(new JdbcTemplate(datasource), );
+//    }
 
     @Test
     public void findAllTest() {
-        commentRepository.setPersistentClass(Comment.class);
         List<Comment> comments = commentRepository.findAll();
         assertNotNull(comments);
     }
 
     @Test
     public void findByIdTest() {
-        commentRepository.setPersistentClass(Comment.class);
-
         Comment expectedComment = new Comment(1L, "Это первое сообщение", new LocalDateTime("2013-07-19T05:25:00"), 3, 1);
         Comment realComment = commentRepository.findById(1L);
         assertEquals(expectedComment, realComment);
@@ -45,8 +53,6 @@ public class CommentRepositoryTest {
 
     @Test
     public void saveTest() {
-        commentRepository.setPersistentClass(Comment.class);
-
         Comment expectedComment = new Comment("Очередное сообщение", new LocalDateTime("2013-07-20T05:25:00"), 3, 3);
         Comment realComment = commentRepository.save(expectedComment);
         assertEquals(expectedComment, realComment);
@@ -54,8 +60,6 @@ public class CommentRepositoryTest {
 
     @Test(expected = javax.persistence.NoResultException.class)
     public void deleteTest() {
-        commentRepository.setPersistentClass(Comment.class);
-
         Comment comment = commentRepository.findById(2L);
 
         commentRepository.delete(comment);
@@ -65,8 +69,6 @@ public class CommentRepositoryTest {
 
     @Test
     public void updateTest() {
-        commentRepository.setPersistentClass(Comment.class);
-
         Comment comment = commentRepository.findById(3L);
         assertEquals("Третье сообщение", comment.getText());
 
