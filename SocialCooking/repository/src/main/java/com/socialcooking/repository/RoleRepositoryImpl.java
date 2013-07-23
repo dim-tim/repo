@@ -1,11 +1,12 @@
 package com.socialcooking.repository;
 
-/**
- * Created with IntelliJ IDEA.
- * User: dima
- * Date: 7/23/13
- * Time: 8:49 PM
- * To change this template use File | Settings | File Templates.
- */
-public class RoleRepositoryImpl {
+
+import com.socialcooking.domain.Role;
+import com.socialcooking.repository.api.RoleRepository;
+
+public class RoleRepositoryImpl extends GenericRepositoryImpl<Role> implements RoleRepository {
+
+    protected RoleRepositoryImpl() {
+        super(Role.class);
+    }
 }
