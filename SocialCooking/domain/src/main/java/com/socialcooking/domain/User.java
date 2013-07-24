@@ -1,53 +1,79 @@
 package com.socialcooking.domain;
 
 
-import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.*;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
-public class User {
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "select u from User u"),
+        @NamedQuery(name = "User.findById", query = "select u from User u where u.login = :login")})
+public class User extends DomainObject{
 
-
-    private Long id;
+    @Column(name = "login")
+    @NotEmpty(message = "Login of the user cannot be empty or null")
     private String login;
-    private String password;
-    private String name;
-    private String surname;
-    private String email;
-    private String photoPath;
 
-    private LocalDateTime birthday;
-    private GenderType gender;
-    private Integer telephone;
-    private String country;
-    private String city;
-    private String address;
-    private String about;
-    private Integer countOfPositiveMarks;
-    private Integer countOfNegativeMarks;
-
-    private LocalDateTime dateRegistration;
-
-    //for many to many mapping
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "role_has_app_user",
+            joinColumns = @JoinColumn(name = "id_app_user_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
     private Set<Role> roles = new HashSet<Role>();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_app_user")
-    public Long getId() {
-        return id;
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "birth_date")
+    private LocalDateTime birthday;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private GenderType gender;
+
+    @Column(name = "telephone")
+    private Integer telephone;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "about")
+    private String about;
+
+    @Column(name = "rating")
+    private Double rating;
+
+    @Column(name = "registration_date")
+    private DateTime dateRegistration;
+
+    @Column(name = "photo")
+    private String photoPath;
+
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column(name = "user_login")
     public String getLogin() {
         return login;
     }
@@ -56,7 +82,6 @@ public class User {
         this.login = login;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -65,7 +90,6 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -74,7 +98,6 @@ public class User {
         this.name = name;
     }
 
-    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
@@ -83,7 +106,6 @@ public class User {
         this.surname = surname;
     }
 
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -92,8 +114,6 @@ public class User {
         this.email = email;
     }
 
-    @Column(name = "birth_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getBirthday() {
         return birthday;
     }
@@ -102,8 +122,6 @@ public class User {
         this.birthday = birthday;
     }
 
-    @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
     public GenderType getGender() {
         return gender;
     }
@@ -112,7 +130,6 @@ public class User {
         this.gender = gender;
     }
 
-    @Column(name = "telephone")
     public Integer getTelephone() {
         return telephone;
     }
@@ -121,7 +138,6 @@ public class User {
         this.telephone = telephone;
     }
 
-    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -130,7 +146,6 @@ public class User {
         this.country = country;
     }
 
-    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -139,7 +154,6 @@ public class User {
         this.city = city;
     }
 
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -148,7 +162,6 @@ public class User {
         this.address = address;
     }
 
-    @Column(name = "about")
     public String getAbout() {
         return about;
     }
@@ -157,36 +170,22 @@ public class User {
         this.about = about;
     }
 
-    @Column(name = "registration_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
-    public LocalDateTime getDateRegistration() {
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public DateTime getDateRegistration() {
         return dateRegistration;
     }
 
-    public void setDateRegistration(LocalDateTime dateRegistration) {
+    public void setDateRegistration(DateTime dateRegistration) {
         this.dateRegistration = dateRegistration;
     }
 
-    @Column(name = "negative_marks")
-    public Integer getCountOfNegativeMarks() {
-        return countOfNegativeMarks;
-    }
-
-
-    public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
-        this.countOfNegativeMarks = countOfNegativeMarks;
-    }
-
-    @Column(name = "positive_marks")
-    public Integer getCountOfPositiveMarks() {
-        return countOfPositiveMarks;
-    }
-
-    public void setCountOfPositiveMarks(Integer countOfPositiveMarks) {
-        this.countOfPositiveMarks = countOfPositiveMarks;
-    }
-
-    @Column(name = "photo_path")
     public String getPhotoPath() {
         return photoPath;
     }
@@ -195,21 +194,62 @@ public class User {
         this.photoPath = photoPath;
     }
 
-
-//    @ManyToMany
-//    @JoinTable(name = "user_has_role", joinColumns = @JoinColumn(name = "ID_USER"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
-
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @ManyToMany
-    @JoinTable(name = "app_user_has_role",
-            joinColumns = @JoinColumn(name = "id_app_user_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        User user = (User) o;
+
+        if (about != null ? !about.equals(user.about) : user.about != null) return false;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
+        if (city != null ? !city.equals(user.city) : user.city != null) return false;
+        if (country != null ? !country.equals(user.country) : user.country != null) return false;
+        if (dateRegistration != null ? !dateRegistration.equals(user.dateRegistration) : user.dateRegistration != null)
+            return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (gender != user.gender) return false;
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (photoPath != null ? !photoPath.equals(user.photoPath) : user.photoPath != null) return false;
+        if (rating != null ? !rating.equals(user.rating) : user.rating != null) return false;
+        if (roles != null ? !roles.equals(user.roles) : user.roles != null) return false;
+        if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
+        if (telephone != null ? !telephone.equals(user.telephone) : user.telephone != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (about != null ? about.hashCode() : 0);
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + (dateRegistration != null ? dateRegistration.hashCode() : 0);
+        result = 31 * result + (photoPath != null ? photoPath.hashCode() : 0);
+        return result;
     }
 }
