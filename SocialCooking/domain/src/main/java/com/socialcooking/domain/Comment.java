@@ -15,6 +15,7 @@ public class Comment {
     private Integer countOfPositiveMarks;
     private Integer countOfNegativeMarks;
 
+
     public Comment() {
 
     }
