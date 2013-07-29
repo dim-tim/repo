@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("SectionRepository")
 @Repository
 @Transactional
-public class SectionRepositoryImpl extends GenericRepositoryImpl<Section, Long> implements SectionRepository {
+public class SectionRepositoryImpl extends GenericRepositoryImpl<Section> implements SectionRepository {
 
     private Logger log = LoggerFactory.getLogger(SectionRepositoryImpl.class);
 

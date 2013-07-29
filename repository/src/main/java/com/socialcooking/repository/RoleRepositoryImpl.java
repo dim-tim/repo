@@ -13,5 +13,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("RoleRepository")
 @Repository
 @Transactional
-public class RoleRepositoryImpl extends GenericRepositoryImpl<Role, Long> implements RoleRepository{
+public class RoleRepositoryImpl extends GenericRepositoryImpl<Role> implements RoleRepository{
 }

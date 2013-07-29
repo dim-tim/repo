@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Transactional
-public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
+public class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
     @PersistenceContext
     private EntityManager em;
@@ -39,7 +39,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @Override
     @Transactional(readOnly = true)
-    public T findById(ID id) {
+    public T findById(Long id) {
         String findByIdQuery = String.format(genericFindByIdQuery, persistentClass.getSimpleName());
 
         Query query = em.createQuery(findByIdQuery);
@@ -78,7 +78,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
     }
 
     @Override
-    public void deleteById(ID id) {
+    public void deleteById(Long id) {
         String deleteByIdQuery = String.format(genericDeleteByIdQuery, persistentClass.getSimpleName());
 
         Query query = em.createQuery(deleteByIdQuery);

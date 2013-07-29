@@ -5,7 +5,7 @@ import com.socialcooking.domain.Comment;
 /**
  * @author Mikalai Kisel
  */
-public interface CommentRepository extends GenericRepository<Comment, Long>{
+public interface CommentRepository extends GenericRepository<Comment>{
 
 
 }

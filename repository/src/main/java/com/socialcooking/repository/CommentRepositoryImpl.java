@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("CommentRepository")
 @Repository
 @Transactional
-public class CommentRepositoryImpl extends GenericRepositoryImpl<Comment, Long> implements CommentRepository {
+public class CommentRepositoryImpl extends GenericRepositoryImpl<Comment> implements CommentRepository {
 
     private Logger log = LoggerFactory.getLogger(CommentRepository.class);
 

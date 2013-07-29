@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("RecipeRepository")
 @Repository
 @Transactional
-public class RecipeRepositoryImpl extends GenericRepositoryImpl<Recipe, Long> implements RecipeRepository {
+public class RecipeRepositoryImpl extends GenericRepositoryImpl<Recipe> implements RecipeRepository {
 
 }

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("ProviderRepository")
 @Repository
 @Transactional
-public class ProviderRepositoryImpl extends GenericRepositoryImpl<Provider, Long> implements ProviderRepository {
+public class ProviderRepositoryImpl extends GenericRepositoryImpl<Provider> implements ProviderRepository {
 
     private Logger log = LoggerFactory.getLogger(IngredientRepositoryImpl.class);
 

@@ -5,6 +5,6 @@ import com.socialcooking.domain.Provider;
 /**
  * @author Mikalai Kisel
  */
-public interface ProviderRepository extends GenericRepository<Provider, Long> {
+public interface ProviderRepository extends GenericRepository<Provider> {
 
 }

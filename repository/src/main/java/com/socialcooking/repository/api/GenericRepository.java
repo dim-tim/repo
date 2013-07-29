@@ -6,9 +6,9 @@ import java.util.List;
  * @author Mikalai Kisel
  */
 
-public interface GenericRepository<T, ID> {
+public interface GenericRepository<T> {
 
-    public T findById(ID id);
+    public T findById(Long id);
 
     public List<T> findAll();
 
@@ -18,7 +18,7 @@ public interface GenericRepository<T, ID> {
 
     public void delete(T entity);
 
-    public void deleteById(ID id);
+    public void deleteById(Long id);
 
     public void deleteAll();
 

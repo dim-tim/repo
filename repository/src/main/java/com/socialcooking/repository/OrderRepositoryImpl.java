@@ -13,5 +13,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("OrderRepository")
 @Repository
 @Transactional
-public class OrderRepositoryImpl extends GenericRepositoryImpl<Order, Long> implements OrderRepository{
+public class OrderRepositoryImpl extends GenericRepositoryImpl<Order> implements OrderRepository{
 }

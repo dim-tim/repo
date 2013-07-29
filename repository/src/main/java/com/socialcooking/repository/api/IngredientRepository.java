@@ -5,7 +5,7 @@ import com.socialcooking.domain.Ingredient;
 /**
  * @author Mikalai Kisel
  */
-public interface IngredientRepository extends GenericRepository <Ingredient, Long> {
+public interface IngredientRepository extends GenericRepository <Ingredient> {
 
 
 }
