@@ -46,6 +46,7 @@ public class GenericRepositoryImpl<T extends DomainObject> implements GenericRep
         return (T) query.getSingleResult();
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public List<T> findAll() {
