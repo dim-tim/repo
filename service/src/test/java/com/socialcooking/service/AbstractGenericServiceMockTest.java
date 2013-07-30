@@ -35,19 +35,19 @@ public abstract class AbstractGenericServiceMockTest<T extends DomainObject> {
 
     @Test
     public void testDeleteById() {
-        getMockRepository().deleteById(getEntity().getId());
+        getService().deleteById(getEntity().getId());
         verify(getMockRepository()).deleteById(getEntity().getId());
     }
 
     @Test
     public void testDelete() {
-        getMockRepository().delete(getEntity());
+        getService().delete(getEntity());
         verify(getMockRepository()).delete(getEntity());
     }
 
     @Test
     public void testDeleteAll() {
-        getMockRepository().deleteAll();
+        getService().deleteAll();
         verify(getMockRepository()).deleteAll();
     }
 
