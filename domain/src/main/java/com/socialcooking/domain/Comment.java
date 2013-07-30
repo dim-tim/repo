@@ -18,7 +18,6 @@ public class Comment extends DomainObject{
     private Recipe recipe;
 
 
-
     public Comment() {
 
     }
