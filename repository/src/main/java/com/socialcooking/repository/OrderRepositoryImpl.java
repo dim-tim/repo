@@ -6,10 +6,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Mikalai Kisel
- */
-
 @Service("OrderRepository")
 @Repository
 @Transactional

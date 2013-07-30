@@ -9,9 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name= "provider")
-public class Provider {
+public class Provider extends DomainObject{
 
-    private Long id;
     private String name;
     private String termsOfDelivery;
     private String aboutCompany;
@@ -47,17 +46,6 @@ public class Provider {
         this.registrationDate = registrationDate;
         this.countOfPositiveMarks = countOfPositiveMarks;
         this.countOfNegativeMarks = countOfNegativeMarks;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_provider")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "provider_name")

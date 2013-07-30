@@ -4,9 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ingredient")
-public class Ingredient {
+public class Ingredient extends DomainObject{
 
-    private Long id;
     private String name;
     private String comment;
     private String quantity;
@@ -28,17 +27,6 @@ public class Ingredient {
         this.name = name;
         this.comment = comment;
         this.quantity = quantity;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ingredient")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "name_ingredient")

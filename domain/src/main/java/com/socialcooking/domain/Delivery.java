@@ -7,9 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "delivery")
-public class Delivery {
+public class Delivery extends DomainObject{
 
-    private Long id;
     private Integer price;
     private boolean isPrepared;
     private Integer priceDelivery;
@@ -34,17 +33,6 @@ public class Delivery {
         this.price = price;
         isPrepared = prepared;
         this.priceDelivery = priceDelivery;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_delivery")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "price")

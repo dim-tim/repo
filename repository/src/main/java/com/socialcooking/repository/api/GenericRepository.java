@@ -1,12 +1,11 @@
 package com.socialcooking.repository.api;
 
+import com.socialcooking.domain.DomainObject;
+
 import java.util.List;
 
-/**
- * @author Mikalai Kisel
- */
 
-public interface GenericRepository<T> {
+public interface GenericRepository<T extends DomainObject> {
 
     public T findById(Long id);
 
@@ -14,7 +13,7 @@ public interface GenericRepository<T> {
 
     public T save(T entity);
 
-    public T update(T entity);
+//    public T update(T entity);
 
     public void delete(T entity);
 

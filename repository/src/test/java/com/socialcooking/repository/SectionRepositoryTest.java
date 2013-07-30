@@ -14,12 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * @author Mikalai Kisel
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
 //May be H2 or MYSQL. MySQL is not work.
@@ -71,7 +68,7 @@ public class SectionRepositoryTest {
         assertEquals("", realSection.getDescription());
 
         realSection.setDescription("Очень вкусные");
-        sectionRepository.update(realSection);
+        sectionRepository.save(realSection);
 
         realSection = sectionRepository.findById(3L);
         assertEquals("Очень вкусные", realSection.getDescription());

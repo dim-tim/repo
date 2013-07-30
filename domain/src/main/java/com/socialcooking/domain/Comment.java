@@ -7,9 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "app_comment")
-public class Comment {
+public class Comment extends DomainObject{
 
-    private Long id;
     private String text;
     private LocalDateTime date;
     private Integer countOfPositiveMarks;
@@ -39,17 +38,6 @@ public class Comment {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_app_comment")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Column(name = "content")
     public String getText() {

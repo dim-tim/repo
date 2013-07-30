@@ -14,12 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-
-/**
- * @author Mikalai Kisel
- */
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
@@ -63,7 +59,7 @@ public class IngredientRepositoryTest {
         assertEquals("Масло", ingredient.getName());
 
         ingredient.setName("Сыр");
-        ingredientRepository.update(ingredient);
+        ingredientRepository.save(ingredient);
 
         ingredient = ingredientRepository.findById(3L);
         assertEquals("Сыр", ingredient.getName());

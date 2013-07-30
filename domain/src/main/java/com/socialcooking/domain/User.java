@@ -10,10 +10,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
-public class User {
+public class User extends DomainObject {
 
 
-    private Long id;
     private String login;
     private String password;
     private String name;
@@ -37,17 +36,6 @@ public class User {
     private Set<Role> roles = new HashSet<Role>();
     private Set<Comment> comments = new HashSet<Comment>();
     private Set<Recipe> recipes = new HashSet<Recipe>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_app_user")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Column(name = "user_login")
     public String getLogin() {

@@ -7,9 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "section")
-public class Section {
+public class Section extends DomainObject {
 
-    private Long id;
     private String name;
     private String description;
 
@@ -22,17 +21,6 @@ public class Section {
     public Section(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_section")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "name_section")
@@ -82,11 +70,4 @@ public class Section {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Section{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

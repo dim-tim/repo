@@ -6,10 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role extends DomainObject {
 
 
-    private Long id;
     private String roleName;
     private String description;
 
@@ -28,17 +27,6 @@ public class Role {
         this.id = id;
         this.roleName = roleName;
         this.description = description;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_role")
-    public Long getId_role() {
-        return id;
-    }
-
-    public void setId_role(Long id) {
-        this.id = id;
     }
 
     @Column(name = "role_name")

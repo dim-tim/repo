@@ -14,12 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-/**
- * @author Mikalai Kisel
- */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
@@ -63,7 +59,7 @@ public class DeliveryRepositoryTest {
         assertEquals((Object) 3000, delivery.getPrice());
 
         delivery.setPrice(4000);
-        deliveryRepository.update(delivery);
+        deliveryRepository.save(delivery);
 
         delivery = deliveryRepository.findById(3L);
         assertEquals((Object) 4000, delivery.getPrice());

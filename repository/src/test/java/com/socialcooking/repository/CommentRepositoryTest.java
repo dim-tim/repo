@@ -9,26 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * @author Mikalai Kisel
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
 //May be H2 or MYSQL
 @ActiveProfiles("H2")
+@Transactional
 public class CommentRepositoryTest {
 
     @Autowired
     private CommentRepository commentRepository;
-
 
     @Test
     public void findAllTest() {
@@ -79,7 +75,7 @@ public class CommentRepositoryTest {
         assertEquals("Третье сообщение", comment.getText());
 
         comment.setText("Обновлено");
-        commentRepository.update(comment);
+        commentRepository.save(comment);
 
         comment = commentRepository.findById(3L);
         assertEquals("Обновлено", comment.getText());

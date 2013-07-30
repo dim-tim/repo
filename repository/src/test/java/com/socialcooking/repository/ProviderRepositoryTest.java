@@ -15,12 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-
-/**
- * @author Mikalai Kisel
- */
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
@@ -64,7 +60,7 @@ public class ProviderRepositoryTest {
         assertEquals("Доставка по Минску", provider.getTermsOfDelivery());
 
         provider.setTermsOfDelivery("Доставка по Минску и Бресте");
-        providerRepository.update(provider);
+        providerRepository.save(provider);
 
         provider = providerRepository.findById(3L);
         assertEquals("Доставка по Минску и Бресте", provider.getTermsOfDelivery());

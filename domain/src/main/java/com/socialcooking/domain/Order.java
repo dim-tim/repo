@@ -7,26 +7,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_order")
-public class Order {
+public class Order extends DomainObject{
 
-    private Long id;
     private LocalDateTime date;
 
     private Delivery delivery;
     private User user;
 
     public Order() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user_order")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "date")

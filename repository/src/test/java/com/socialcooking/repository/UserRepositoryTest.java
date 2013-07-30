@@ -12,15 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
-
-/**
- * @author Mikalai Kisel
- */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
@@ -41,9 +36,6 @@ public class UserRepositoryTest {
         assertNotNull(users);
 
         Set<Role> roles =  users.get(0).getRoles();
-        System.out.println(roles.size());
-        for (Role role: users.get(0).getRoles())
-            System.out.println(role);
 
     }
 }

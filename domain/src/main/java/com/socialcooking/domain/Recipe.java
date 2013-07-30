@@ -6,9 +6,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "recipe")
-public class Recipe {
+public class Recipe extends DomainObject {
 
-    private Long id;
     private String name;
     private String photoPath;
     private String description;
@@ -45,17 +44,6 @@ public class Recipe {
         this.accepted = accepted;
         this.countOfPositiveMarks = countOfPositiveMarks;
         this.countOfNegativeMarks = countOfNegativeMarks;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_recipe")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Column(name = "recipe_name")
@@ -195,16 +183,4 @@ public class Recipe {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", photoPath='" + photoPath + '\'' +
-                ", description='" + description + '\'' +
-                ", accepted=" + accepted +
-                ", countOfPositiveMarks=" + countOfPositiveMarks +
-                ", countOfNegativeMarks=" + countOfNegativeMarks +
-                '}';
-    }
 }

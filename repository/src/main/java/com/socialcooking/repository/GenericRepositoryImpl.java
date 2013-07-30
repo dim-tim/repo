@@ -1,5 +1,6 @@
 package com.socialcooking.repository;
 
+import com.socialcooking.domain.DomainObject;
 import com.socialcooking.repository.api.GenericRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,12 +12,9 @@ import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-/**
- * @author Mikalai Kisel
- */
 
 @Transactional
-public class GenericRepositoryImpl<T> implements GenericRepository<T> {
+public class GenericRepositoryImpl<T extends DomainObject> implements GenericRepository<T> {
 
     @PersistenceContext
     private EntityManager em;
@@ -60,16 +58,19 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
     @Override
     public T save(T entity) {
-        em.persist(entity);
+        if (entity.getId()==null)
+            em.persist(entity);
+        else
+            em.merge(entity);
         return entity;
     }
 
-    @Override
-    public T update(T entity) {
-        em.merge(entity);
-        return entity;
-
-    }
+//    @Override
+//    public T update(T entity) {
+//        em.merge(entity);
+//        return entity;
+//
+//    }
 
     @Override
     public void delete(T entity) {
