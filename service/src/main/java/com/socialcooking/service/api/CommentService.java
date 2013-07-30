@@ -1,7 +1,9 @@
 package com.socialcooking.service.api;
 
 
-public interface CommentService {
+import com.socialcooking.domain.Comment;
+
+public interface CommentService extends GenericService<Comment> {
 
 
 }
