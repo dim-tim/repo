@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,6 +31,24 @@ public abstract class AbstractGenericServiceMockTest<T extends DomainObject> {
 
         assertNotNull(testReturnEntity);
         assertTrue(testReturnEntity.getId() == getEntity().getId());
+    }
+
+    @Test
+    public void testDeleteById() {
+        getMockRepository().deleteById(getEntity().getId());
+        verify(getMockRepository()).deleteById(getEntity().getId());
+    }
+
+    @Test
+    public void testDelete() {
+        getMockRepository().delete(getEntity());
+        verify(getMockRepository()).delete(getEntity());
+    }
+
+    @Test
+    public void testDeleteAll() {
+        getMockRepository().deleteAll();
+        verify(getMockRepository()).deleteAll();
     }
 
     @Test
