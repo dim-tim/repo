@@ -17,7 +17,6 @@ public class Comment extends DomainObject{
     private User user;
     private Recipe recipe;
 
-
     public Comment() {
 
     }
