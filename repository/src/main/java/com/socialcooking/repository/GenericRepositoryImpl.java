@@ -48,7 +48,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T> {
         return (T) query.getSingleResult();
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<T> findAll() {
