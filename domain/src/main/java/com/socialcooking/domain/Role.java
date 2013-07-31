@@ -8,16 +8,9 @@ import java.util.Set;
 @Table(name = "role")
 public class Role extends DomainObject {
 
-    @Column(name = "role_name")
     private String roleName;
-
-    @Column(name = "description")
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "app_user_has_role",
-            joinColumns = @JoinColumn(name = "id_role_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_app_user_fk"))
     private Set<User> users = new HashSet<User>();
 
     public Role() {
@@ -35,7 +28,7 @@ public class Role extends DomainObject {
         this.description = description;
     }
 
-
+    @Column(name = "role_name")
     public String getRoleName() {
         return roleName;
     }
@@ -44,7 +37,7 @@ public class Role extends DomainObject {
         this.roleName = roleName;
     }
 
-
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -53,7 +46,10 @@ public class Role extends DomainObject {
         this.description = description;
     }
 
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_has_role",
+            joinColumns = @JoinColumn(name = "id_role_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_app_user_fk"))
     public Set<User> getUsers() {
         return users;
     }

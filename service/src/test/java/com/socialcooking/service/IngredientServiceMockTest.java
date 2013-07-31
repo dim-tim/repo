@@ -1,11 +1,8 @@
 package com.socialcooking.service;
 
 
-import com.socialcooking.domain.Delivery;
 import com.socialcooking.domain.Ingredient;
-import com.socialcooking.repository.DeliveryRepositoryImpl;
 import com.socialcooking.repository.IngredientRepositoryImpl;
-import com.socialcooking.repository.api.DeliveryRepository;
 import com.socialcooking.repository.api.GenericRepository;
 import com.socialcooking.repository.api.IngredientRepository;
 import com.socialcooking.service.api.GenericService;

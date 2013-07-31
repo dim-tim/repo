@@ -8,43 +8,19 @@ import java.util.Set;
 @Table(name = "recipe")
 public class Recipe extends DomainObject {
 
-    @Column(name = "recipe_name")
     private String name;
-
-    @Column(name = "photo_path")
     private String photoPath;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "accepted")
     //accepted by manager
     private boolean accepted;
-
-    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
-
-    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<Comment>();
-
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Ingredient> ingredients = new HashSet<Ingredient>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "delivery_has_recipe",
-            joinColumns = @JoinColumn(name = "id_recipe_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_delivery_fk"))
     private Set<Delivery> deliveries = new HashSet<Delivery>();
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_app_user_fk")
     private User user;
-
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_section_fk")
     private Section section;
 
     public Recipe() {
@@ -70,7 +46,7 @@ public class Recipe extends DomainObject {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-
+    @Column(name = "recipe_name")
     public String getName() {
         return name;
     }
@@ -79,7 +55,7 @@ public class Recipe extends DomainObject {
         this.name = name;
     }
 
-
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -88,7 +64,7 @@ public class Recipe extends DomainObject {
         this.description = description;
     }
 
-
+    @Column(name = "photo_path")
     public String getPhotoPath() {
         return photoPath;
     }
@@ -97,7 +73,7 @@ public class Recipe extends DomainObject {
         this.photoPath = photoPath;
     }
 
-
+    @Column(name = "positive_marks")
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -106,7 +82,7 @@ public class Recipe extends DomainObject {
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-
+    @Column(name = "negative_marks")
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }
@@ -115,7 +91,7 @@ public class Recipe extends DomainObject {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-
+    @Column(name = "accepted")
     public boolean isAccepted() {
         return accepted;
     }
@@ -124,7 +100,7 @@ public class Recipe extends DomainObject {
         this.accepted = accepted;
     }
 
-
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Comment> getComments() {
         return comments;
     }
@@ -133,7 +109,8 @@ public class Recipe extends DomainObject {
         this.comments = comments;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_app_user_fk")
     public User getUser() {
         return user;
     }
@@ -142,7 +119,8 @@ public class Recipe extends DomainObject {
         this.user = user;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_section_fk")
     public Section getSection() {
         return section;
     }
@@ -151,7 +129,7 @@ public class Recipe extends DomainObject {
         this.section = section;
     }
 
-
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -161,6 +139,10 @@ public class Recipe extends DomainObject {
     }
 
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "delivery_has_recipe",
+            joinColumns = @JoinColumn(name = "id_recipe_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_delivery_fk"))
     public Set<Delivery> getDeliveries() {
         return deliveries;
     }

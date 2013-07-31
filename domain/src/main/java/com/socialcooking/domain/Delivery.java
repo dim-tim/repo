@@ -7,32 +7,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "delivery")
-public class Delivery extends DomainObject {
+public class Delivery extends DomainObject{
 
-    @Column(name = "price")
     private Integer price;
-
-    @Column(name = "is_prepared")
     private boolean isPrepared;
-
-    @Column(name = "delivery_price")
     private Integer priceDelivery;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_provider_fk")
     private Provider provider;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "delivery_has_recipe",
-            joinColumns = @JoinColumn(name = "id_delivery_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_recipe_fk"))
     private Set<Recipe> recipes = new HashSet<Recipe>();
-
-    //orphanRemoval = true
-    @OneToMany(mappedBy = "delivery", cascade = CascadeType.REFRESH)
     private Set<Order> orders = new HashSet<Order>();
 
-    public Delivery() {
+    public Delivery(){
 
     }
 
@@ -49,7 +35,7 @@ public class Delivery extends DomainObject {
         this.priceDelivery = priceDelivery;
     }
 
-
+    @Column(name = "price")
     public Integer getPrice() {
         return price;
     }
@@ -58,7 +44,7 @@ public class Delivery extends DomainObject {
         this.price = price;
     }
 
-
+    @Column(name = "is_prepared")
     public boolean isPrepared() {
         return isPrepared;
     }
@@ -67,7 +53,7 @@ public class Delivery extends DomainObject {
         isPrepared = prepared;
     }
 
-
+    @Column(name = "delivery_price")
     public Integer getPriceDelivery() {
         return priceDelivery;
     }
@@ -76,7 +62,10 @@ public class Delivery extends DomainObject {
         this.priceDelivery = priceDelivery;
     }
 
-
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinTable(name = "delivery_has_recipe",
+            joinColumns = @JoinColumn(name = "id_delivery_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_recipe_fk"))
     public Set<Recipe> getRecipes() {
         return recipes;
     }
@@ -85,7 +74,8 @@ public class Delivery extends DomainObject {
         this.recipes = recipes;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_provider_fk")
     public Provider getProvider() {
         return provider;
     }
@@ -94,7 +84,8 @@ public class Delivery extends DomainObject {
         this.provider = provider;
     }
 
-
+    //orphanRemoval = true
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Set<Order> getOrders() {
         return orders;
     }

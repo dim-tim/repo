@@ -1,12 +1,9 @@
 package com.socialcooking.service;
 
 
-import com.socialcooking.domain.Order;
 import com.socialcooking.domain.Provider;
-import com.socialcooking.repository.OrderRepositoryImpl;
 import com.socialcooking.repository.ProviderRepositoryImpl;
 import com.socialcooking.repository.api.GenericRepository;
-import com.socialcooking.repository.api.OrderRepository;
 import com.socialcooking.repository.api.ProviderRepository;
 import com.socialcooking.service.api.GenericService;
 import org.junit.Before;

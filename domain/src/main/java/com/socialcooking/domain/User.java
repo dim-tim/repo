@@ -28,7 +28,6 @@ public class User extends DomainObject {
     private String about;
     private Integer countOfPositiveMarks;
     private Integer countOfNegativeMarks;
-
     private LocalDateTime dateRegistration;
 
     //for many to many mapping

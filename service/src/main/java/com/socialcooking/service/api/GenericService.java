@@ -2,7 +2,6 @@ package com.socialcooking.service.api;
 
 
 import com.socialcooking.domain.DomainObject;
-import com.socialcooking.repository.api.GenericRepository;
 
 import java.util.List;
 

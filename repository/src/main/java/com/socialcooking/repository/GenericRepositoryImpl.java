@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+@Transactional
 public class GenericRepositoryImpl<T extends DomainObject> implements GenericRepository<T> {
 
     @PersistenceContext
@@ -57,7 +58,7 @@ public class GenericRepositoryImpl<T extends DomainObject> implements GenericRep
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public T save(T entity) {
         if (entity.getId() == null)
             em.persist(entity);
@@ -67,14 +68,14 @@ public class GenericRepositoryImpl<T extends DomainObject> implements GenericRep
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(T entity) {
         T mergedEntity = em.merge(entity);
         em.remove(mergedEntity);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteById(Long id) {
         String deleteByIdQuery = String.format(QUERY_DELETE_BY_ID, persistentClass.getSimpleName());
 
@@ -85,7 +86,7 @@ public class GenericRepositoryImpl<T extends DomainObject> implements GenericRep
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteAll() {
         String deleteAllQuery = String.format(QUERY_DELETE_ALL, persistentClass.getSimpleName());
 
@@ -94,7 +95,7 @@ public class GenericRepositoryImpl<T extends DomainObject> implements GenericRep
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+//    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public long count() {
         String countRowQuery = String.format(QUERY_COUNT_ALL, persistentClass.getSimpleName());
 

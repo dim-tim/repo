@@ -9,13 +9,9 @@ import java.util.Set;
 @Table(name = "section")
 public class Section extends DomainObject {
 
-    @Column(name = "name_section")
     private String name;
-
-    @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Recipe> recipes = new HashSet<Recipe>();
 
     public Section() {
@@ -27,7 +23,7 @@ public class Section extends DomainObject {
         this.description = description;
     }
 
-
+    @Column(name = "name_section")
     public String getName() {
         return name;
     }
@@ -36,7 +32,7 @@ public class Section extends DomainObject {
         this.name = name;
     }
 
-
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -45,7 +41,7 @@ public class Section extends DomainObject {
         this.description = description;
     }
 
-
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Recipe> getRecipes() {
         return recipes;
     }

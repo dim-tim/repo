@@ -4,19 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ingredient")
-public class Ingredient extends DomainObject {
+public class Ingredient extends DomainObject{
 
-    @Column(name = "name_ingredient")
     private String name;
-
-    @Column(name = "comment")
     private String comment;
-
-    @Column(name = "quantity")
     private String quantity;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_recipe_fk")
     private Recipe recipe;
 
     public Ingredient() {
@@ -36,7 +29,7 @@ public class Ingredient extends DomainObject {
         this.quantity = quantity;
     }
 
-
+    @Column(name = "name_ingredient")
     public String getName() {
         return name;
     }
@@ -45,7 +38,7 @@ public class Ingredient extends DomainObject {
         this.name = name;
     }
 
-
+    @Column(name = "comment")
     public String getComment() {
         return comment;
     }
@@ -54,7 +47,7 @@ public class Ingredient extends DomainObject {
         this.comment = comment;
     }
 
-
+    @Column(name = "quantity")
     public String getQuantity() {
         return quantity;
     }
@@ -63,7 +56,8 @@ public class Ingredient extends DomainObject {
         this.quantity = quantity;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_recipe_fk")
     public Recipe getRecipe() {
         return recipe;
     }

@@ -6,24 +6,14 @@ import com.socialcooking.repository.api.ProviderRepository;
 import com.socialcooking.repository.api.UserRepository;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/datasource-test.xml")
-//May be H2 or MYSQL
-@ActiveProfiles("H2")
-@Transactional
-public class ProviderRepositoryTest {
+public class ProviderRepositoryTest extends AbstractRepositoryTest {
 
     @Autowired
     private ProviderRepository providerRepository;
@@ -46,7 +36,7 @@ public class ProviderRepositoryTest {
 
     @Test
     public void saveTest() {
-        Provider expectedProvider = new Provider("Ресторан Белая Лошадь", "Доставка по Бресту", "Работают проф повара", true,  new LocalDateTime("2013-07-19"), 14, 5);
+        Provider expectedProvider = new Provider("Ресторан Белая Лошадь", "Доставка по Бресту", "Работают проф повара", true, new LocalDateTime("2013-07-19"), 14, 5);
         User user = userRepository.findById(1L);
         expectedProvider.setUser(user);
 

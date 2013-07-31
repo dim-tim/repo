@@ -7,24 +7,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_order")
-public class Order extends DomainObject {
+public class Order extends DomainObject{
 
-    @Column(name = "date")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime date;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_delivery_fk")
     private Delivery delivery;
-
-    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_app_user_fk")
     private User user;
 
     public Order() {
     }
 
-
+    @Column(name = "date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getDate() {
         return date;
     }
@@ -33,7 +27,8 @@ public class Order extends DomainObject {
         this.date = date;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_delivery_fk")
     public Delivery getDelivery() {
         return delivery;
     }
@@ -42,7 +37,8 @@ public class Order extends DomainObject {
         this.delivery = delivery;
     }
 
-
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="id_app_user_fk")
     public User getUser() {
         return user;
     }
