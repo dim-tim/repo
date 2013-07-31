@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Service("IngredientRepository")
 @Repository
 @Transactional
 public class IngredientRepositoryImpl extends GenericRepositoryImpl<Ingredient> implements IngredientRepository {

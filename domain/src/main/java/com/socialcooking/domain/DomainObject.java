@@ -8,10 +8,10 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class DomainObject {
 
-    protected Long id;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+
     public Long getId() {
         return id;
     }

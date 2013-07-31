@@ -8,19 +8,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name= "provider")
-public class Provider extends DomainObject{
+@Table(name = "provider")
+public class Provider extends DomainObject {
 
+    @Column(name = "provider_name")
     private String name;
+
+    @Column(name = "terms_of_delivery")
     private String termsOfDelivery;
+
+    @Column(name = "about_company")
     private String aboutCompany;
+
+    @Column(name = "accepted")
     private Boolean accepted;
+
+    @Column(name = "registration_date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime registrationDate;
+
+    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
+
+    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
 
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_app_user_fk")
     private User user;
 
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Delivery> deliveries = new HashSet<Delivery>();
 
     public Provider() {
@@ -48,7 +65,7 @@ public class Provider extends DomainObject{
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    @Column(name = "provider_name")
+
     public String getName() {
         return name;
     }
@@ -57,7 +74,7 @@ public class Provider extends DomainObject{
         this.name = name;
     }
 
-    @Column(name = "terms_of_delivery")
+
     public String getTermsOfDelivery() {
         return termsOfDelivery;
     }
@@ -66,7 +83,7 @@ public class Provider extends DomainObject{
         this.termsOfDelivery = termsOfDelivery;
     }
 
-    @Column(name = "about_company")
+
     public String getAboutCompany() {
         return aboutCompany;
     }
@@ -75,7 +92,7 @@ public class Provider extends DomainObject{
         this.aboutCompany = aboutCompany;
     }
 
-    @Column(name = "accepted")
+
     public Boolean getAccepted() {
         return accepted;
     }
@@ -84,8 +101,7 @@ public class Provider extends DomainObject{
         this.accepted = accepted;
     }
 
-    @Column(name = "registration_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
@@ -94,7 +110,7 @@ public class Provider extends DomainObject{
         this.registrationDate = registrationDate;
     }
 
-    @Column(name = "positive_marks")
+
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -103,7 +119,7 @@ public class Provider extends DomainObject{
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-    @Column(name = "negative_marks")
+
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }
@@ -112,7 +128,7 @@ public class Provider extends DomainObject{
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+
     public Set<Delivery> getDeliveries() {
         return deliveries;
     }
@@ -121,8 +137,7 @@ public class Provider extends DomainObject{
         this.deliveries = deliveries;
     }
 
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="id_app_user_fk")
+
     public User getUser() {
         return user;
     }
