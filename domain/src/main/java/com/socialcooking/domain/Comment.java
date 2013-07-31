@@ -7,14 +7,27 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "app_comment")
-public class Comment extends DomainObject{
+public class Comment extends DomainObject {
 
+    @Column(name = "content")
     private String text;
+
+    @Column(name = "date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime date;
+
+    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
+
+    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
 
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_app_user_fk")
     private User user;
+
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_recipe_fk")
     private Recipe recipe;
 
     public Comment() {
@@ -37,7 +50,6 @@ public class Comment extends DomainObject{
     }
 
 
-    @Column(name = "content")
     public String getText() {
         return text;
     }
@@ -46,8 +58,7 @@ public class Comment extends DomainObject{
         this.text = text;
     }
 
-    @Column(name = "date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+
     public LocalDateTime getDate() {
         return date;
     }
@@ -56,7 +67,7 @@ public class Comment extends DomainObject{
         this.date = date;
     }
 
-    @Column(name = "positive_marks")
+
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -65,7 +76,7 @@ public class Comment extends DomainObject{
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-    @Column(name = "negative_marks")
+
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }
@@ -74,8 +85,7 @@ public class Comment extends DomainObject{
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="id_app_user_fk")
+
     public User getUser() {
         return user;
     }
@@ -84,8 +94,6 @@ public class Comment extends DomainObject{
         this.user = user;
     }
 
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
-    @JoinColumn(name="id_recipe_fk")
     public Recipe getRecipe() {
         return recipe;
     }
@@ -120,15 +128,5 @@ public class Comment extends DomainObject{
         result = 31 * result + (countOfPositiveMarks != null ? countOfPositiveMarks.hashCode() : 0);
         result = 31 * result + (countOfNegativeMarks != null ? countOfNegativeMarks.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "text='" + text + '\'' +
-                ", date=" + date +
-                ", countOfPositiveMarks=" + countOfPositiveMarks +
-                ", countOfNegativeMarks=" + countOfNegativeMarks +
-                '}';
     }
 }

@@ -12,30 +12,70 @@ import java.util.Set;
 @Table(name = "app_user")
 public class User extends DomainObject {
 
+    @Column(name = "user_login")
     private String login;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "photo_path")
     private String photoPath;
+
+    @Column(name = "birth_date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime birthday;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private GenderType gender;
+
+    @Column(name = "telephone")
     private Integer telephone;
+
+    @Column(name = "country")
     private String country;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "about")
     private String about;
+
+    @Column(name = "positive_marks")
     private Integer countOfPositiveMarks;
+
+    @Column(name = "negative_marks")
     private Integer countOfNegativeMarks;
+
+    @Column(name = "registration_date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime dateRegistration;
 
-    //for many to many mapping
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_has_role",
+            joinColumns = @JoinColumn(name = "id_app_user_fk"),
+            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
     private Set<Role> roles = new HashSet<Role>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<Comment>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Recipe> recipes = new HashSet<Recipe>();
 
-    @Column(name = "user_login")
+
     public String getLogin() {
         return login;
     }
@@ -44,7 +84,6 @@ public class User extends DomainObject {
         this.login = login;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -53,7 +92,6 @@ public class User extends DomainObject {
         this.password = password;
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -62,7 +100,6 @@ public class User extends DomainObject {
         this.name = name;
     }
 
-    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
@@ -71,7 +108,6 @@ public class User extends DomainObject {
         this.surname = surname;
     }
 
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -80,8 +116,6 @@ public class User extends DomainObject {
         this.email = email;
     }
 
-    @Column(name = "birth_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getBirthday() {
         return birthday;
     }
@@ -90,8 +124,6 @@ public class User extends DomainObject {
         this.birthday = birthday;
     }
 
-    @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
     public GenderType getGender() {
         return gender;
     }
@@ -100,7 +132,6 @@ public class User extends DomainObject {
         this.gender = gender;
     }
 
-    @Column(name = "telephone")
     public Integer getTelephone() {
         return telephone;
     }
@@ -109,7 +140,6 @@ public class User extends DomainObject {
         this.telephone = telephone;
     }
 
-    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -118,7 +148,6 @@ public class User extends DomainObject {
         this.country = country;
     }
 
-    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -127,7 +156,6 @@ public class User extends DomainObject {
         this.city = city;
     }
 
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -136,7 +164,6 @@ public class User extends DomainObject {
         this.address = address;
     }
 
-    @Column(name = "about")
     public String getAbout() {
         return about;
     }
@@ -145,8 +172,6 @@ public class User extends DomainObject {
         this.about = about;
     }
 
-    @Column(name = "registration_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getDateRegistration() {
         return dateRegistration;
     }
@@ -155,17 +180,14 @@ public class User extends DomainObject {
         this.dateRegistration = dateRegistration;
     }
 
-    @Column(name = "negative_marks")
     public Integer getCountOfNegativeMarks() {
         return countOfNegativeMarks;
     }
-
 
     public void setCountOfNegativeMarks(Integer countOfNegativeMarks) {
         this.countOfNegativeMarks = countOfNegativeMarks;
     }
 
-    @Column(name = "positive_marks")
     public Integer getCountOfPositiveMarks() {
         return countOfPositiveMarks;
     }
@@ -174,7 +196,6 @@ public class User extends DomainObject {
         this.countOfPositiveMarks = countOfPositiveMarks;
     }
 
-    @Column(name = "photo_path")
     public String getPhotoPath() {
         return photoPath;
     }
@@ -183,10 +204,6 @@ public class User extends DomainObject {
         this.photoPath = photoPath;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "app_user_has_role",
-            joinColumns = @JoinColumn(name = "id_app_user_fk"),
-            inverseJoinColumns = @JoinColumn(name = "id_role_fk"))
     public Set<Role> getRoles() {
         return roles;
     }
@@ -195,7 +212,6 @@ public class User extends DomainObject {
         this.roles = roles;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Comment> getComments() {
         return comments;
     }
@@ -204,7 +220,6 @@ public class User extends DomainObject {
         this.comments = comments;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Recipe> getRecipes() {
         return recipes;
     }
