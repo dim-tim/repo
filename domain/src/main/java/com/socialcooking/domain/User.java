@@ -12,14 +12,13 @@ import java.util.Set;
 @Table(name = "app_user")
 public class User extends DomainObject {
 
-
     private String login;
     private String password;
     private String name;
     private String surname;
     private String email;
-    private String photoPath;
 
+    private String photoPath;
     private LocalDateTime birthday;
     private GenderType gender;
     private Integer telephone;

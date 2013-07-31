@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
 //May be H2 or MYSQL
-@ActiveProfiles("H2")
+@ActiveProfiles("MYSQL")
 @Transactional
 public class CommentRepositoryTest {
 
