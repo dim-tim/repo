@@ -47,5 +47,10 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ecwid</groupId>
+            <artifactId>ecwid-mailchimp</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
