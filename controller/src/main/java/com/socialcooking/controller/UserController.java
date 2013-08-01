@@ -18,15 +18,6 @@ public class UserController {
         User user = new User();
         uiModel.addAttribute("user", user);
 
-//        MailChimpClient mailChimpClient = new MailChimpClient();
-//        ListSubscribeMethod listSubscribeMethod = new ListSubscribeMethod();
-//        listSubscribeMethod.apikey = "******";
-//        listSubscribeMethod.id = "******";
-//        listSubscribeMethod.email_address = "vasya-pupkin@example.com";
-//        listSubscribeMethod.double_optin = false;
-//        listSubscribeMethod.update_existing = true;
-//        listSubscribeMethod.merge_vars = new MergeVars("vasya-pupkin@example.com", "Vasya", "Pupkin");
-//        mailChimpClient.execute(listSubscribeMethod);
 
         return "user/new";
     }
