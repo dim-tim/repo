@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/datasource-test.xml")
 //May be H2 or MYSQL
-@ActiveProfiles("MYSQL")
+@ActiveProfiles("H2")
 @Transactional
 public abstract class AbstractRepositoryTest {
+
+
 }

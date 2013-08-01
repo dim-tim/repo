@@ -1,5 +1,6 @@
 package com.socialcooking.controller;
 
+import com.ecwid.mailchimp.MailChimpClient;
 import com.ecwid.mailchimp.MailChimpException;
 import com.socialcooking.domain.User;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class UserController {
     public String saveCarForm(Model uiModel) throws IOException, MailChimpException {
         User user = new User();
         uiModel.addAttribute("user", user);
-
+        MailChimpClient mailChimpClient = new MailChimpClient();
 
         return "user/new";
     }
